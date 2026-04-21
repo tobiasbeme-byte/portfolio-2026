@@ -701,20 +701,32 @@
       }
 
       // ── Scale slide to window ──
+     // ── Scale slide to window (Versión mejorada para móviles) ──
       function scaleViewport() {
         const ww = window.innerWidth;
         const wh = window.innerHeight;
-        const navH = 80; // reserve space for the bottom nav bar
-        const margin = 20; // small safety margin so nothing clips
+        const navH = 70; // Reducimos un poco el espacio para el menú en móviles
+        const margin = 10; // Margen más pequeño para aprovechar mejor la pantalla
+        
         const sw = 1600;
         const sh = 900;
-        const availW = ww - margin * 2;
-        const availH = wh - navH - margin * 2;
+
+        // Calculamos el espacio disponible restando el menú
+        const availW = ww - (margin * 2);
+        const availH = wh - navH - (margin * 2);
+
+        // Calculamos la escala ideal para que quepa todo el ancho o todo el alto
         const scale = Math.min(availW / sw, availH / sh);
+
+        // Calculamos la posición para centrar el porfolio exactamente en el medio
         const ox = (ww - sw * scale) / 2;
-        const oy = margin; // always start from top with margin
+        const oy = (wh - navH - sh * scale) / 2;
+
+        // Aplicamos la transformación
+        viewport.style.transformOrigin = 'top left';
         viewport.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
       }
+      
 
       // ── Navigation ──
       function goTo(n) {
