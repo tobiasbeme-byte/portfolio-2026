@@ -37,22 +37,21 @@
       overflow: hidden;
     }
 
-    /* ── PRESENTATION SHELL ── */
+   /* ── PRESENTATION SHELL ── */
     #presentation {
       position: fixed;
       inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: #000;
+      overflow: hidden; /* Evita que aparezcan barras de scroll */
     }
 
     #slide-viewport {
-      position: relative;
+      position: absolute; /* Cambiado de relative a absolute */
       background: #000;
       overflow: hidden;
-      width: var(--slide-w);
-      height: var(--slide-h);
-      transform-origin: top left;
+      width: 1600px;
+      height: 900px;
+      transform-origin: 0 0; /* Asegura que el escalado parta desde la esquina */
     }
 
     /* ── SLIDES ── */
@@ -702,28 +701,22 @@
 
       // ── Scale slide to window ──
      // ── Scale slide to window (Versión mejorada para móviles) ──
-      function scaleViewport() {
+     function scaleViewport() {
         const ww = window.innerWidth;
         const wh = window.innerHeight;
-        const navH = 70; // Reducimos un poco el espacio para el menú en móviles
-        const margin = 10; // Margen más pequeño para aprovechar mejor la pantalla
+        const navH = 90; // Espacio reservado para el menú inferior
         
         const sw = 1600;
         const sh = 900;
 
-        // Calculamos el espacio disponible restando el menú
-        const availW = ww - (margin * 2);
-        const availH = wh - navH - (margin * 2);
+        // Calculamos la escala para que quepa en el ancho o en el alto disponible
+        const scale = Math.min(ww / sw, (wh - navH) / sh);
 
-        // Calculamos la escala ideal para que quepa todo el ancho o todo el alto
-        const scale = Math.min(availW / sw, availH / sh);
-
-        // Calculamos la posición para centrar el porfolio exactamente en el medio
+        // Calculamos los píxeles exactos para centrar
         const ox = (ww - sw * scale) / 2;
         const oy = (wh - navH - sh * scale) / 2;
 
-        // Aplicamos la transformación
-        viewport.style.transformOrigin = 'top left';
+        // Aplicamos el movimiento y el tamaño al mismo tiempo
         viewport.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
       }
       
