@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tobias Diaz – Porfolio Mediador Cultural 2026</title>
+  <meta name="description"
+    content="Portfolio de Tobias Diaz, Mediador Cultural y Asistente de Galerías. Experiencia en Fundación Andreani, MACAB, Galería Pasto y más." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --fg: #EDECED;
+      --bg: #000000;
+      --accent: #EDECED;
+      --slide-w: 1600px;
+      --slide-h: 900px;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      background: #111;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    /* ── PRESENTATION SHELL ── */
+    #presentation {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #slide-viewport {
+      position: relative;
+      background: #000;
+      overflow: hidden;
+      width: var(--slide-w);
+      height: var(--slide-h);
+      transform-origin: top left;
+    }
+
+    /* ── SLIDES ── */
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.7s cubic-bezier(.4, 0, .2, 1);
+      overflow: hidden;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ── SHAPE LAYER ── */
+    .shape {
+      position: absolute;
+      overflow: hidden;
+    }
+
+    .shape img.bg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── TEXT BOXES ── */
+    .textbox {
+      position: absolute;
+      color: var(--fg);
+    }
+
+    /* ── NAVIGATION ── */
+    #nav {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 10px 20px;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      color: var(--fg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      transition: background 0.2s;
+      opacity: 0.7;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      opacity: 1;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .nav-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--fg);
+    }
+
+    #slide-counter {
+      color: var(--fg);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .dot-nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .dot.active {
+      background: var(--fg);
+      transform: scale(1.4);
+    }
+
+    /* ── VIDEO MODAL ── */
+    #video-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.92);
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    #video-modal.open {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    /* landscape modal (16:9) */
+    #modal-inner {
+      position: relative;
+      width: min(90vw, calc(82vh * 16/9));
+    }
+
+    #modal-inner .modal-ratio {
+      position: relative;
+      padding-bottom: 56.25%;
+      /* 16:9 default */
+      height: 0;
+      background: #000;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+    }
+
+    /* portrait modal (9:16) */
+    #modal-inner.portrait {
+      width: auto;
+      height: min(82vh, calc(90vw * 16/9));
+    }
+
+    #modal-inner.portrait .modal-ratio {
+      padding-bottom: 0;
+      height: 100%;
+      width: calc(min(82vh, calc(90vw * 16/9)) * 9/16);
+    }
+
+    #modal-inner iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    #modal-title {
+      color: var(--fg);
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+
+    #modal-close {
+      position: absolute;
+      top: -44px;
+      right: 0;
+      background: none;
+      border: none;
+      color: var(--fg);
+      font-size: 28px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      line-height: 1;
+    }
+
+    #modal-close:hover {
+      opacity: 1;
+    }
+
+    /* ── PLAY BUTTON OVERLAY ── */
+    .play-btn {
+      position: absolute;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+      z-index: 10;
+    }
+
+    .play-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .play-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* ── SLIDE 0: PORTADA ── */
+    #slide-0 .title-name {
+      position: absolute;
+      left: 44%;
+      top: 55%;
+      line-height: 0.9;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 152px;
+      color: var(--fg);
+      letter-spacing: -0.02em;
+    }
+
+    #slide-0 .subtitle-left {
+      position: absolute;
+      left: 45.2%;
+      top: 8%;
+      font-size: 21px;
+      letter-spacing: 0.15em;
+      color: var(--fg);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    #slide-0 .year {
+      position: absolute;
+      left: 79.5%;
+      top: 8%;
+      font-size: 21px;
+      letter-spacing: 0.15em;
+      color: var(--fg);
+      text-align: right;
+      width: 19.4%;
+    }
+
+    /* ── SLIDE 1: SOBRE MÍ ── */
+    #slide-1 .section-title {
+      position: absolute;
+      left: 0%;
+      bottom: 0%;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 148px;
+      color: var(--fg);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    #slide-1 .name-tag {
+      position: absolute;
+      left: 77.1%;
+      top: 10%;
+      width: 19.4%;
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--fg);
+      text-align: right;
+    }
+
+    #slide-1 .degree {
+      position: absolute;
+      left: 1.4%;
+      top: 8%;
+      font-size: 22px;
+      letter-spacing: 0.1em;
+      color: var(--fg);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    #slide-1 .bio {
+      position: absolute;
+      left: 68.6%;
+      top: 40.4%;
+      width: 26.5%;
+      font-size: 22px;
+      line-height: 1.55;
+      color: var(--fg);
+      text-align: right;
+    }
+
+    /* ── SLIDE 2: EXPERIENCIA (01 & 02) ── */
+    #slide-2 .exp-title {
+      position: absolute;
+      left: 21%;
+      top: 1%;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 136px;
+      color: var(--fg);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .exp-number {
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 62px;
+      color: var(--fg);
+    }
+
+    .exp-info {
+      position: absolute;
+    }
+
+    .exp-info .org {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .exp-info .role {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+    }
+
+    .exp-desc {
+      position: absolute;
+      font-size: 19px;
+      color: var(--fg);
+      line-height: 1.55;
+    }
+
+    /* ── SLIDE 3: EXPERIENCIA (03 & 04) ── */
+
+    /* ── SLIDE 4: FILOSOFÍA ── */
+    #slide-4 .philosophy {
+      position: absolute;
+      left: 46.3%;
+      top: 18.4%;
+      width: 50%;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      color: var(--fg);
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── SLIDE 5: CONTACTO ── */
+    #slide-5 .contact-title {
+      position: absolute;
+      left: 2%;
+      top: 2.8%;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 99px;
+      color: var(--fg);
+      line-height: 1.05;
+    }
+
+    #slide-5 .contact-info {
+      position: absolute;
+      left: 2%;
+      bottom: 14%;
+      font-size: 26px;
+      color: var(--fg);
+      line-height: 2.2;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    #slide-5 .contact-country {
+      position: absolute;
+      left: 2%;
+      bottom: 5%;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    #slide-5 .contact-email {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(237, 236, 237, 0.4);
+      transition: border-color 0.2s;
+    }
+
+    #slide-5 .contact-email:hover {
+      border-color: var(--fg);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="presentation">
+    <div id="slide-viewport">
+
+      <!-- ══════════════════════════════════════════
+         SLIDE 0 – PORTADA
+    ══════════════════════════════════════════ -->
+      <div class="slide active" id="slide-0">
+        <!-- Background image (left freeform) -->
+        <div class="shape" style="left:0%;top:0%;width:43.2%;height:100%;">
+          <img class="bg-img" src="assets/slide0_img0.jpg" alt="Portada" />
+        </div>
+        <!-- Title -->
+        <div class="title-name">
+          TOBIAS<br>DIAZ
+        </div>
+        <!-- Subtitle -->
+        <div class="subtitle-left">MEDIADOR CULTURAL Y ASISTENTE DE GALERIAS</div>
+        <!-- Year -->
+        <div class="year">2026</div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+         SLIDE 1 – SOBRE MÍ
+    ══════════════════════════════════════════ -->
+      <div class="slide" id="slide-1">
+        <div class="shape" style="left:5.5%;top:22.6%;width:28.1%;height:75%;">
+          <img class="bg-img" src="assets/slide1_img0.jpg" alt="" />
+        </div>
+        <div class="shape" style="left:1.4%;top:0%;width:34.2%;height:52.7%;">
+          <img class="bg-img" src="assets/slide1_img1.jpg" alt="" />
+        </div>
+        <div class="shape" style="left:34.1%;top:15.8%;width:31.6%;height:75%;">
+          <img class="bg-img" src="assets/slide1_img2.jpg" alt="" />
+        </div>
+
+        <div class="degree">LICENCIADO EN CURADURIA / MASTER EN COMUNICACIÓN</div>
+        <div class="name-tag">TOBIAS DIAZ</div>
+        <div class="bio">
+          Llevo desde 2024 involucrándome profesionalmente en el campo cultural. Diseñé y ejecuté programas de mediación
+          para la Fundación Andreani que atendieron a más de 500 visitantes mensuales, adaptando contenidos técnicos
+          para audiencias diversas.
+        </div>
+        <div class="section-title" style="left:0%;bottom:0%;width:50%;">SOBRE MÍ</div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+         SLIDE 2 – EXPERIENCIA 01 & 02
+    ══════════════════════════════════════════ -->
+      <div class="slide" id="slide-2">
+        <!-- Photo blocks -->
+        <div class="shape" style="left:3.6%;top:25.2%;width:48.2%;height:62.1%;">
+          <img class="bg-img" src="assets/slide2_img0.jpg" alt="Fundación Andreani" />
+        </div>
+        <div class="shape" style="left:64.1%;top:25%;width:30.8%;height:56.8%;">
+          <img class="bg-img" src="assets/slide2_img1.jpg" alt="Galería Urra Hip-Hip" />
+        </div>
+
+        <!-- Big title -->
+        <div class="exp-title">EXPERIENCIA</div>
+
+        <!-- 01 Fundación Andreani -->
+        <div class="exp-number" style="left:0.6%;top:15.5%;">01</div>
+        <div class="exp-info" style="left:5.5%;top:16.9%;">
+          <div class="org">FUNDACION ANDREANI</div>
+          <div class="role">2024-2025, MEDIADOR CULTURAL.</div>
+        </div>
+        <div class="exp-desc" style="left:4.6%;top:87%;width:47%;">
+          Gestión de grupos de hasta 60 personas en entornos museísticos, garantizando la calidad del relato
+          institucional y la fidelización del público a través de estrategias de mediación crítica.
+        </div>
+
+        <!-- 02 Galería Urra -->
+        <div class="exp-number" style="left:59.6%;top:14.3%;">02</div>
+        <div class="exp-info" style="left:65.5%;top:16.2%;">
+          <div class="org">GALERIA URRA HIP-HIP</div>
+          <div class="role">2024, ASISTENTE DE GALERÍA DE ARTE.</div>
+        </div>
+        <div class="exp-desc" style="left:62%;top:84.8%;width:37%;">
+          Atención al cliente y asesoramiento comercial para coleccionistas, facilitando el proceso de venta mediante un
+          conocimiento profundo del mercado de arte y la producción de los artistas residentes.
+        </div>
+
+        <!-- Play button Andreani: landscape 16:9 -->
+        <div class="play-btn" id="play-andreani" style="left:25%;top:51.6%;width:5.3%;height:9.3%;"
+          data-video-id="sqxaf2ckxe" data-aspect="landscape" data-title="Fundación Andreani – Mediación Cultural">
+          <img src="assets/slide2_img2.png" alt="Ver video Fundación Andreani" />
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+         SLIDE 3 – EXPERIENCIA 03 & 04
+    ══════════════════════════════════════════ -->
+      <div class="slide" id="slide-3">
+        <!-- Photo blocks: img0=MACAB (tall portrait area), img1=portrait decorativo izq, img2=Pasto -->
+        <!-- img1 es retrato decorativo estrecho izquierda -->
+        <div class="shape" style="left:1.64%;top:26.53%;width:21.23%;height:46.95%;">
+          <img class="bg-img" src="assets/slide3_img1.png" alt="" style="object-position:center top;" />
+        </div>
+        <!-- img0=foto MACAB principal (centro-izq) -->
+        <div class="shape" style="left:16.6%;top:15.44%;width:26.36%;height:62.48%;">
+          <img class="bg-img" src="assets/slide3_img0.jpg" alt="MACAB" style="object-position:center center;" />
+        </div>
+        <!-- img2=foto Galería Pasto (derecha) -->
+        <div class="shape" style="left:67.54%;top:15.44%;width:24.06%;height:57.04%;">
+          <img class="bg-img" src="assets/slide3_img2.jpg" alt="Galería Pasto" style="object-position:center center;" />
+        </div>
+
+        <!-- 03 MACAB -->
+        <div class="exp-number" style="left:0%;top:0.46%;">03</div>
+        <div class="exp-info" style="left:6.45%;top:2.55%;">
+          <div class="org">MACAB (MUSEO DE ARTE CONTEMPORANEO)</div>
+          <div class="role">2025, ASISTENCIA EN MONTAJE DE OBRA.</div>
+        </div>
+        <div class="exp-desc" style="left:7.35%;top:78.58%;width:31%;">
+          Asistencia técnica en la instalación de exhibiciones de gran formato, colaborando estrechamente con artistas y
+          curadores para la correcta implementación de requerimientos espaciales y lumínicos.
+        </div>
+
+        <!-- 04 Galería Pasto -->
+        <div class="exp-number" style="left:59.68%;top:0.62%;">04</div>
+        <div class="exp-info" style="left:66.65%;top:1.86%;">
+          <div class="org">GALERIA PASTO</div>
+          <div class="role">2024-2025, ASISTENTE DE GALERÍA.</div>
+        </div>
+        <div class="exp-desc" style="left:65.85%;top:76.97%;width:28%;">
+          Soporte operativo en la gestión de trastienda e inventario, incluyendo el acondicionamiento, embalaje técnico
+          para transporte nacional e internacional y actualización de bases de datos.
+        </div>
+
+        <!-- Play MACAB: portrait 9:16 -->
+        <div class="play-btn" id="play-macab" style="left:17.62%;top:42.01%;width:5.25%;height:9.34%;"
+          data-video-id="gmadd5f6iy" data-aspect="portrait" data-title="MACAB – Montaje de Obra">
+          <img src="assets/slide3_img4.png" alt="Ver video MACAB" />
+        </div>
+
+        <!-- Play Galería Pasto: portrait 9:16 -->
+        <div class="play-btn" id="play-pasto" style="left:76.94%;top:42.01%;width:5.25%;height:9.34%;"
+          data-video-id="rj9uddmup6" data-aspect="portrait" data-title="Galería Pasto – Catalogación y Embalaje">
+          <img src="assets/slide3_img3.png" alt="Ver video Galería Pasto" />
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+         SLIDE 4 – FILOSOFÍA
+    ══════════════════════════════════════════ -->
+      <div class="slide" id="slide-4">
+        <div class="shape" style="left:5.6%;top:7.3%;width:34.9%;height:82.7%;">
+          <img class="bg-img" src="assets/slide4_img0.jpg" alt="" />
+        </div>
+        <div class="philosophy">
+          Lo que más me gusta hacer es generar experiencias mediante el arte.<br>
+          Poder brindar un relato que despierte interés<br>
+          en todo lo que habita el espacio.
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════
+         SLIDE 5 – CONTACTO
+    ══════════════════════════════════════════ -->
+      <div class="slide" id="slide-5">
+        <div class="shape" style="left:56.1%;top:7.2%;width:31.4%;height:85.5%;">
+          <img class="bg-img" src="assets/slide5_img0.jpg" alt="" />
+        </div>
+        <div class="contact-title">CONTACTA<br>CONMIGO</div>
+        <div class="contact-info">
+          LLAMAME AL <strong>637 89 19 26</strong><br>
+          ESCRIBIME EN <a class="contact-email" href="mailto:tobias.beme@gmail.com">TOBIAS.BEME@GMAIL.COM</a>
+        </div>
+        <div class="contact-country">ESPAÑA.</div>
+      </div>
+
+    </div><!-- /slide-viewport -->
+  </div><!-- /presentation -->
+
+  <!-- ── VIDEO MODAL ── -->
+  <div id="video-modal" role="dialog" aria-modal="true" aria-label="Reproductor de video">
+    <div id="modal-inner">
+      <p id="modal-title"></p>
+      <button id="modal-close" aria-label="Cerrar video">✕</button>
+      <div class="modal-ratio">
+        <iframe id="modal-iframe" allow="autoplay; fullscreen" allowfullscreen src="about:blank">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NAVIGATION ── -->
+  <nav id="nav" aria-label="Navegación de diapositivas">
+    <button class="nav-btn" id="btn-prev" aria-label="Anterior" disabled>
+      <svg viewBox="0 0 24 24">
+        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z" />
+      </svg>
+    </button>
+    <div class="dot-nav" id="dot-nav"></div>
+    <span id="slide-counter">1 / 6</span>
+    <button class="nav-btn" id="btn-next" aria-label="Siguiente">
+      <svg viewBox="0 0 24 24">
+        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
+      </svg>
+    </button>
+  </nav>
+
+  <script>
+    (() => {
+      const TOTAL = 6;
+      let current = 0;
+      const slides = document.querySelectorAll('.slide');
+      const prevBtn = document.getElementById('btn-prev');
+      const nextBtn = document.getElementById('btn-next');
+      const counter = document.getElementById('slide-counter');
+      const dotNav = document.getElementById('dot-nav');
+      const viewport = document.getElementById('slide-viewport');
+      const modal = document.getElementById('video-modal');
+      const modalIframe = document.getElementById('modal-iframe');
+      const modalTitle = document.getElementById('modal-title');
+      const modalClose = document.getElementById('modal-close');
+
+      // ── Build dots ──
+      for (let i = 0; i < TOTAL; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Ir a diapositiva ${i + 1}`);
+        dot.addEventListener('click', () => goTo(i));
+        dotNav.appendChild(dot);
+      }
+
+      function updateDots() {
+        dotNav.querySelectorAll('.dot').forEach((d, i) => {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      // ── Scale slide to window ──
+      function scaleViewport() {
+        const ww = window.innerWidth;
+        const wh = window.innerHeight;
+        const navH = 80; // reserve space for the bottom nav bar
+        const margin = 20; // small safety margin so nothing clips
+        const sw = 1600;
+        const sh = 900;
+        const availW = ww - margin * 2;
+        const availH = wh - navH - margin * 2;
+        const scale = Math.min(availW / sw, availH / sh);
+        const ox = (ww - sw * scale) / 2;
+        const oy = margin; // always start from top with margin
+        viewport.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
+      }
+
+      // ── Navigation ──
+      function goTo(n) {
+        slides[current].classList.remove('active');
+        current = Math.max(0, Math.min(TOTAL - 1, n));
+        slides[current].classList.add('active');
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === TOTAL - 1;
+        counter.textContent = `${current + 1} / ${TOTAL}`;
+        updateDots();
+      }
+
+      prevBtn.addEventListener('click', () => goTo(current - 1));
+      nextBtn.addEventListener('click', () => goTo(current + 1));
+
+      document.addEventListener('keydown', (e) => {
+        if (modal.classList.contains('open')) {
+          if (e.key === 'Escape') closeModal();
+          return;
+        }
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
+      });
+
+      // ── Video modal ──
+      const modalInner = document.getElementById('modal-inner');
+
+      function openModal(videoId, title, aspect) {
+        // Adjust modal shape based on video aspect ratio
+        if (aspect === 'portrait') {
+          modalInner.classList.add('portrait');
+        } else {
+          modalInner.classList.remove('portrait');
+        }
+        const src = `https://fast.wistia.net/embed/iframe/${videoId}?videoFoam=true&playbar=true&volumeControl=true&settingsControl=true&endVideoBehavior=default`;
+        modalIframe.src = src;
+        modalTitle.textContent = title;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('open');
+        modalInner.classList.remove('portrait');
+        modalIframe.src = 'about:blank';
+        document.body.style.overflow = '';
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      // ── Bind play buttons ──
+      document.querySelectorAll('.play-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.videoId;
+          const title = btn.dataset.title;
+          const aspect = btn.dataset.aspect || 'landscape';
+          if (id) openModal(id, title, aspect);
+        });
+      });
+
+      // ── Init ──
+      window.addEventListener('resize', scaleViewport);
+      scaleViewport();
+    })();
+  </script>
+</body>
+
+</html>
