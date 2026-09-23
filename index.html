@@ -35,6 +35,7 @@
       font-family: 'Inter', sans-serif;
       overflow: hidden;
       color: var(--fg);
+      user-select: none;
     }
 
     #presentation {
@@ -42,6 +43,7 @@
       inset: 0;
       background: #000;
       overflow: hidden;
+      z-index: 1;
     }
 
     #slide-viewport {
@@ -60,14 +62,16 @@
       height: 100%;
       background: #000;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.6s cubic-bezier(.4, 0, .2, 1);
+      transition: opacity 0.5s cubic-bezier(.4, 0, .2, 1), visibility 0.5s;
       overflow: hidden;
     }
 
     .slide.active {
       opacity: 1;
-      pointer-events: all;
+      visibility: visible;
+      pointer-events: auto;
     }
 
     .shape {
@@ -82,7 +86,7 @@
       display: block;
     }
 
-    /* ── NAVEGACIÓN INFERIOR ── */
+    /* ── NAVEGACIÓN INFERIOR (MÁXIMA PRIORIDAD) ── */
     #nav {
       position: fixed;
       bottom: 24px;
@@ -91,13 +95,14 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      z-index: 1000;
-      background: rgba(18, 18, 18, 0.85);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      z-index: 9999; /* Asegura clics sin interferencia */
+      background: rgba(18, 18, 18, 0.9);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 50px;
       padding: 10px 24px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+      pointer-events: auto;
     }
 
     .nav-btn {
@@ -108,11 +113,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       transition: background 0.2s, opacity 0.2s;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
     .nav-btn:hover {
@@ -122,21 +127,22 @@
 
     .nav-btn:disabled {
       opacity: 0.2;
-      cursor: default;
+      cursor: not-allowed;
     }
 
     .nav-btn svg {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       fill: var(--fg);
+      pointer-events: none;
     }
 
     #slide-counter {
       color: var(--fg);
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.12em;
-      opacity: 0.8;
+      opacity: 0.85;
       min-width: 60px;
       text-align: center;
     }
@@ -147,12 +153,12 @@
     }
 
     .dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.35);
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.25s ease;
       border: none;
       padding: 0;
     }
@@ -162,16 +168,16 @@
       transform: scale(1.4);
     }
 
-    /* ── MODAL VISOR ── */
+    /* ── MODAL VISOR MULTIMEDIA ── */
     #video-modal {
       display: none;
       position: fixed;
       inset: 0;
-      z-index: 2000;
-      background: rgba(0, 0, 0, 0.94);
+      z-index: 10000;
+      background: rgba(0, 0, 0, 0.95);
       align-items: center;
       justify-content: center;
-      animation: fadeIn 0.3s ease;
+      animation: fadeIn 0.25s ease;
     }
 
     #video-modal.open {
@@ -192,7 +198,7 @@
       position: relative;
       padding-bottom: 56.25%;
       height: 0;
-      background: #FFFFFF; /* Fondo blanco para legibilidad en Drive */
+      background: #FFFFFF;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
@@ -236,9 +242,9 @@
       background: none;
       border: none;
       color: #FFFFFF;
-      font-size: 30px;
+      font-size: 32px;
       cursor: pointer;
-      opacity: 0.8;
+      opacity: 0.85;
       transition: opacity 0.2s;
       line-height: 1;
     }
@@ -254,8 +260,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.25s cubic-bezier(.4, 0, .2, 1);
-      z-index: 10;
+      transition: transform 0.2s ease;
+      z-index: 20;
     }
 
     .play-btn:hover {
@@ -266,7 +272,8 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+      filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.7));
+      pointer-events: none;
     }
 
     /* ── SLIDE 0: PORTADA ── */
@@ -346,7 +353,7 @@
       text-align: right;
     }
 
-    /* ── FORMATO DE EXPERIENCIA CORREGIDO ── */
+    /* ── ENCABEZADOS EXPERIENCIA ── */
     .exp-title-clean {
       position: absolute;
       right: 3.5%;
@@ -407,7 +414,7 @@
       letter-spacing: 0.02em;
     }
 
-    /* ── SLIDE 6: CONTACTO ── */
+    /* ── SLIDE 6: CONTACTO Y DRIVE ── */
     #slide-6 .contact-title {
       position: absolute;
       left: 3%;
@@ -466,6 +473,7 @@
       transition: background 0.2s, transform 0.2s;
       box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
       border: none;
+      z-index: 20;
     }
 
     #slide-6 .access-projects:hover {
@@ -514,7 +522,7 @@
         <div class="section-title">SOBRE MÍ</div>
       </div>
 
-      <!-- SLIDE 2 – EXPERIENCIA 01: CATEDRAL DE BILBAO (Sin solapamiento) -->
+      <!-- SLIDE 2 – EXPERIENCIA 01: CATEDRAL DE BILBAO -->
       <div class="slide" id="slide-2">
         <div class="exp-num" style="left:3.5%;top:3.5%;">01</div>
         <div class="exp-header" style="left:9%;top:4.2%;">
@@ -535,9 +543,9 @@
           <img class="bg-img" src="slide2_catedral3.jpg" alt="Atención al público" />
         </div>
 
-        <!-- Botón Play sobre la foto central -->
+        <!-- BOTÓN PLAY CATEDRAL (Enlace listo para video vertical) -->
         <div class="play-btn" id="play-catedral" style="left:47%;top:46%;width:5.5%;height:9.5%;"
-          data-video-id="" data-aspect="portrait" data-title="Catedral de Bilbao">
+          data-video-id="" data-aspect="portrait" data-title="Catedral de Bilbao – Atención y Visitas Guiadas">
           <img src="slide3_img3.png" alt="Ver video Catedral" />
         </div>
 
@@ -546,7 +554,7 @@
         </div>
       </div>
 
-      <!-- SLIDE 3 – EXPERIENCIA 02 & 03: ANDREANI Y URRA (Sin título duplicado) -->
+      <!-- SLIDE 3 – EXPERIENCIA 02 & 03: ANDREANI Y URRA -->
       <div class="slide" id="slide-3">
         <!-- 02 Fundación Andreani -->
         <div class="exp-num" style="left:3.5%;top:4%;">02</div>
@@ -630,7 +638,7 @@
         </div>
       </div>
 
-      <!-- SLIDE 6 – CONTACTO Y MÁS PROYECTOS -->
+      <!-- SLIDE 6 – CONTACTO -->
       <div class="slide" id="slide-6">
         <div class="contact-title">CONTACTA<br>CONMIGO</div>
 
@@ -646,7 +654,6 @@
         </div>
         <div class="contact-country">ESPAÑA.</div>
 
-        <!-- Foto de contacto con ruta y respaldo de carga -->
         <div class="shape" style="left:56%;top:7%;width:32%;height:86%;">
           <img class="bg-img" src="slide5_img0.jpg" onerror="this.src='slide5_img0.png'" alt="Contacto" />
         </div>
@@ -666,9 +673,9 @@
     </div>
   </div>
 
-  <!-- NAVEGACIÓN -->
+  <!-- NAVEGACIÓN BLINDADA -->
   <nav id="nav" aria-label="Navegación de diapositivas">
-    <button class="nav-btn" id="btn-prev" aria-label="Anterior" disabled>
+    <button class="nav-btn" id="btn-prev" aria-label="Anterior">
       <svg viewBox="0 0 24 24">
         <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z" />
       </svg>
@@ -683,10 +690,10 @@
   </nav>
 
   <script>
-    (() => {
+    document.addEventListener('DOMContentLoaded', () => {
       const TOTAL = 7;
       let current = 0;
-      const slides = document.querySelectorAll('.slide');
+      const slides = Array.from(document.querySelectorAll('.slide'));
       const prevBtn = document.getElementById('btn-prev');
       const nextBtn = document.getElementById('btn-next');
       const counter = document.getElementById('slide-counter');
@@ -697,16 +704,22 @@
       const modalTitle = document.getElementById('modal-title');
       const modalClose = document.getElementById('modal-close');
 
+      // Crear puntos de navegación
+      dotNav.innerHTML = '';
       for (let i = 0; i < TOTAL; i++) {
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === 0 ? ' active' : '');
         dot.setAttribute('aria-label', `Ir a diapositiva ${i + 1}`);
-        dot.addEventListener('click', () => goTo(i));
+        dot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          goTo(i);
+        });
         dotNav.appendChild(dot);
       }
 
       function updateDots() {
-        dotNav.querySelectorAll('.dot').forEach((d, i) => {
+        const dots = dotNav.querySelectorAll('.dot');
+        dots.forEach((d, i) => {
           d.classList.toggle('active', i === current);
         });
       }
@@ -729,24 +742,39 @@
         slides[current].classList.remove('active');
         current = Math.max(0, Math.min(TOTAL - 1, n));
         slides[current].classList.add('active');
-        prevBtn.disabled = current === 0;
-        nextBtn.disabled = current === TOTAL - 1;
+
+        prevBtn.disabled = (current === 0);
+        nextBtn.disabled = (current === TOTAL - 1);
         counter.textContent = `${current + 1} / ${TOTAL}`;
         updateDots();
       }
 
-      prevBtn.addEventListener('click', () => goTo(current - 1));
-      nextBtn.addEventListener('click', () => goTo(current + 1));
+      // Eventos de botones
+      prevBtn.onclick = (e) => {
+        e.stopPropagation();
+        if (current > 0) goTo(current - 1);
+      };
 
-      document.addEventListener('keydown', (e) => {
+      nextBtn.onclick = (e) => {
+        e.stopPropagation();
+        if (current < TOTAL - 1) goTo(current + 1);
+      };
+
+      // Teclado
+      window.addEventListener('keydown', (e) => {
         if (modal.classList.contains('open')) {
           if (e.key === 'Escape') closeModal();
           return;
         }
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+          if (current < TOTAL - 1) goTo(current + 1);
+        }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          if (current > 0) goTo(current - 1);
+        }
       });
 
+      // Modales
       const modalInner = document.getElementById('modal-inner');
 
       function openModal(videoIdOrUrl, title, aspect, type = 'wistia') {
@@ -756,814 +784,55 @@
           modalInner.classList.remove('portrait');
         }
 
-        let src;
+        let src = '';
         if (type === 'iframe') {
           src = videoIdOrUrl;
-        } else {
+        } else if (videoIdOrUrl) {
           src = `https://fast.wistia.net/embed/iframe/${videoIdOrUrl}?videoFoam=true&playbar=true&volumeControl=true&settingsControl=true&endVideoBehavior=default`;
-        }
-
-        modalIframe.src = src;
-        modalTitle.textContent = title;
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeModal() {
-        modal.classList.remove('open');
-        modalInner.classList.remove('portrait');
-        modalIframe.src = 'about:blank';
-        document.body.style.overflow = '';
-      }
-
-      modalClose.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-      });
-
-      document.querySelectorAll('.play-btn, .iframe-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const id = btn.dataset.videoId;
-          const url = btn.dataset.url;
-          const title = btn.dataset.title;
-          const aspect = btn.dataset.aspect || 'landscape';
-
-          if (id) {
-            openModal(id, title, aspect, 'wistia');
-          } else if (url) {
-            openModal(url, title, aspect, 'iframe');
-          }
-        });
-      });
-
-      window.addEventListener('resize', scaleViewport);
-      scaleViewport();
-    })();
-  </script>
-</body>
-
-</html>      overflow: hidden;
-    }
-
-    #presentation {
-      position: fixed;
-      inset: 0;
-      background: #000;
-      overflow: hidden;
-    }
-
-    #slide-viewport {
-      position: absolute;
-      background: #000;
-      overflow: hidden;
-      width: 1600px;
-      height: 900px;
-      transform-origin: 0 0;
-    }
-
-    .slide {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.7s cubic-bezier(.4, 0, .2, 1);
-      overflow: hidden;
-    }
-
-    .slide.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .shape {
-      position: absolute;
-      overflow: hidden;
-    }
-
-    .shape img.bg-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    #nav {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      z-index: 1000;
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 50px;
-      padding: 10px 22px;
-    }
-
-    .nav-btn {
-      background: none;
-      border: none;
-      color: var(--fg);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      transition: background 0.2s, opacity 0.2s;
-      opacity: 0.7;
-    }
-
-    .nav-btn:hover {
-      background: rgba(255, 255, 255, 0.15);
-      opacity: 1;
-    }
-
-    .nav-btn:disabled {
-      opacity: 0.2;
-      cursor: default;
-    }
-
-    .nav-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: var(--fg);
-    }
-
-    #slide-counter {
-      color: var(--fg);
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      opacity: 0.6;
-      min-width: 60px;
-      text-align: center;
-    }
-
-    .dot-nav {
-      display: flex;
-      gap: 8px;
-    }
-
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      cursor: pointer;
-      transition: all 0.3s;
-      border: none;
-      padding: 0;
-    }
-
-    .dot.active {
-      background: var(--fg);
-      transform: scale(1.4);
-    }
-
-    #video-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      background: rgba(0, 0, 0, 0.92);
-      align-items: center;
-      justify-content: center;
-      animation: fadeIn 0.3s ease;
-    }
-
-    #video-modal.open {
-      display: flex;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    #modal-inner {
-      position: relative;
-      width: min(90vw, calc(82vh * 16/9));
-    }
-
-    #modal-inner .modal-ratio {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      background: #000;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
-    }
-
-    #modal-inner.portrait {
-      width: auto;
-      height: min(82vh, calc(90vw * 16/9));
-    }
-
-    #modal-inner.portrait .modal-ratio {
-      padding-bottom: 0;
-      height: 100%;
-      width: calc(min(82vh, calc(90vw * 16/9)) * 9/16);
-    }
-
-    #modal-inner iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    #modal-title {
-      color: var(--fg);
-      font-size: 13px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      opacity: 0.6;
-    }
-
-    #modal-close {
-      position: absolute;
-      top: -44px;
-      right: 0;
-      background: none;
-      border: none;
-      color: var(--fg);
-      font-size: 28px;
-      cursor: pointer;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-      line-height: 1;
-    }
-
-    #modal-close:hover {
-      opacity: 1;
-    }
-
-    .play-btn {
-      position: absolute;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s;
-      z-index: 10;
-    }
-
-    .play-btn:hover {
-      transform: scale(1.1);
-    }
-
-    .play-btn img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    /* SLIDE 0: PORTADA */
-    #slide-0 .title-name {
-      position: absolute;
-      left: 44%;
-      top: 55%;
-      line-height: 0.9;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 152px;
-      color: var(--fg);
-      letter-spacing: -0.02em;
-    }
-
-    #slide-0 .subtitle-left {
-      position: absolute;
-      left: 45.2%;
-      top: 8%;
-      font-size: 21px;
-      letter-spacing: 0.15em;
-      color: var(--fg);
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    #slide-0 .year {
-      position: absolute;
-      left: 79.5%;
-      top: 8%;
-      font-size: 21px;
-      letter-spacing: 0.15em;
-      color: var(--fg);
-      text-align: right;
-      width: 19.4%;
-    }
-
-    /* SLIDE 1: SOBRE MÍ */
-    #slide-1 .section-title {
-      position: absolute;
-      left: 0%;
-      bottom: 0%;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 148px;
-      color: var(--fg);
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-
-    #slide-1 .name-tag {
-      position: absolute;
-      left: 77.1%;
-      top: 10%;
-      width: 19.4%;
-      font-size: 34px;
-      font-weight: 700;
-      color: var(--fg);
-      text-align: right;
-    }
-
-    #slide-1 .degree {
-      position: absolute;
-      left: 1.4%;
-      top: 8%;
-      font-size: 22px;
-      letter-spacing: 0.1em;
-      color: var(--fg);
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    #slide-1 .bio {
-      position: absolute;
-      left: 68.6%;
-      top: 40.4%;
-      width: 26.5%;
-      font-size: 22px;
-      line-height: 1.55;
-      color: var(--fg);
-      text-align: right;
-    }
-
-    /* FORMATO EXPERIENCIA */
-    .exp-title {
-      position: absolute;
-      left: 21%;
-      top: 1%;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 136px;
-      color: var(--fg);
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-
-    .exp-number {
-      position: absolute;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 62px;
-      color: var(--fg);
-    }
-
-    .exp-info {
-      position: absolute;
-    }
-
-    .exp-info .org {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--fg);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .exp-info .role {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--fg);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      opacity: 0.7;
-    }
-
-    .exp-desc {
-      position: absolute;
-      font-size: 18px;
-      color: var(--fg);
-      line-height: 1.5;
-    }
-
-    /* SLIDE 5: FILOSOFÍA */
-    #slide-5 .philosophy {
-      position: absolute;
-      left: 46.3%;
-      top: 18.4%;
-      width: 50%;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px;
-      color: var(--fg);
-      line-height: 1.15;
-      letter-spacing: 0.02em;
-    }
-
-    /* SLIDE 6: CONTACTO */
-    #slide-6 .contact-title {
-      position: absolute;
-      left: 2%;
-      top: 2.8%;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 99px;
-      color: var(--fg);
-      line-height: 1.05;
-    }
-
-    #slide-6 .contact-info {
-      position: absolute;
-      left: 2%;
-      bottom: 14%;
-      font-size: 26px;
-      color: var(--fg);
-      line-height: 2.2;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    #slide-6 .contact-country {
-      position: absolute;
-      left: 2%;
-      bottom: 5%;
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--fg);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    #slide-6 .contact-email {
-      color: var(--fg);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(237, 236, 237, 0.4);
-      transition: border-color 0.2s;
-    }
-
-    #slide-6 .contact-email:hover {
-      border-color: var(--fg);
-    }
-
-    #slide-6 .access-projects {
-      position: absolute;
-      left: 2%;
-      top: 58%;
-      font-size: 21px;
-      font-weight: 700;
-      color: var(--fg);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      border-bottom: 1px solid rgba(237, 236, 237, 0.4);
-      transition: border-color 0.2s, opacity 0.2s;
-    }
-
-    #slide-6 .access-projects:hover {
-      border-color: var(--fg);
-      opacity: 0.8;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div id="presentation">
-    <div id="slide-viewport">
-
-      <!-- SLIDE 0 – PORTADA -->
-      <div class="slide active" id="slide-0">
-        <div class="shape" style="left:0%;top:0%;width:43.2%;height:100%;">
-          <img class="bg-img" src="slide0_img0.jpg" alt="Portada" />
-        </div>
-        <div class="title-name">
-          TOBIAS<br>DIAZ
-        </div>
-        <div class="subtitle-left">MEDIADOR CULTURAL Y ASISTENTE DE GALERIAS</div>
-        <div class="year">2026</div>
-      </div>
-
-      <!-- SLIDE 1 – SOBRE MÍ -->
-      <div class="slide" id="slide-1">
-        <div class="shape" style="left:5.5%;top:22.6%;width:28.1%;height:75%;">
-          <img class="bg-img" src="slide1_img0.jpg" alt="" />
-        </div>
-        <div class="shape" style="left:1.4%;top:0%;width:34.2%;height:52.7%;">
-          <img class="bg-img" src="slide1_img1.jpg" alt="" />
-        </div>
-        <div class="shape" style="left:34.1%;top:15.8%;width:31.6%;height:75%;">
-          <img class="bg-img" src="slide1_img2.jpg" alt="" />
-        </div>
-
-        <div class="degree">LICENCIADO EN CURADURIA / MASTER EN COMUNICACIÓN</div>
-        <div class="name-tag">TOBIAS DIAZ</div>
-        <div class="bio">
-          Llevo desde 2024 involucrándome profesionalmente en el campo cultural. Diseñé y ejecuté programas de mediación
-          para la Fundación Andreani que atendieron a más de 500 visitantes mensuales, adaptando contenidos técnicos
-          para audiencias diversas.
-        </div>
-        <div class="section-title" style="left:0%;bottom:0%;width:50%;">SOBRE MÍ</div>
-      </div>
-
-      <!-- SLIDE 2 – EXPERIENCIA 01: CATEDRAL DE BILBAO (NUEVA DIAPOSITIVA) -->
-      <div class="slide" id="slide-2">
-        <div class="shape" style="left:4%;top:20%;width:29%;height:64%;">
-          <img class="bg-img" src="slide2_catedral1.jpg" alt="Catedral de Bilbao" />
-        </div>
-        <div class="shape" style="left:35.5%;top:20%;width:29%;height:64%;">
-          <img class="bg-img" src="slide2_catedral2.jpg" alt="Catedral Nave Central" />
-        </div>
-        <div class="shape" style="left:67%;top:20%;width:29%;height:64%;">
-          <img class="bg-img" src="slide2_catedral3.jpg" alt="Atención en Catedral" />
-        </div>
-
-        <div class="exp-title" style="left:18%;">EXPERIENCIA</div>
-
-        <div class="exp-number" style="left:3.5%;top:3.5%;">01</div>
-        <div class="exp-info" style="left:8.5%;top:5.5%;">
-          <div class="org">CATEDRAL DE BILBAO</div>
-          <div class="role">2026, TÉCNICO EN ATENCIÓN AL VISITANTE.</div>
-        </div>
-        <div class="exp-desc" style="left:4%;top:86.5%;width:92%;">
-          30.000 visitantes en el periodo trabajado, brindando: Dinamización y realización de visitas guiadas adaptadas para público general y grupos profesionales. A su vez, la atención e información bilingüe al visitante, promoviendo orden y fluidez en los itinerarios. Por otro lado, la gestión económica de taquilla y control de stock/pedidos en la tienda oficial.
-        </div>
-
-        <!-- Video Catedral -->
-        <div class="play-btn" id="play-catedral" style="left:47.5%;top:46%;width:5.25%;height:9.34%;"
-          data-video-id="" data-aspect="portrait" data-title="Catedral de Bilbao">
-          <img src="slide3_img3.png" alt="Ver video Catedral" />
-        </div>
-      </div>
-
-      <!-- SLIDE 3 – EXPERIENCIA 02 & 03: ANDREANI Y URRA -->
-      <div class="slide" id="slide-3">
-        <div class="shape" style="left:3.6%;top:25.2%;width:48.2%;height:62.1%;">
-          <img class="bg-img" src="slide2_img0.jpg" alt="Fundación Andreani" />
-        </div>
-        <div class="shape" style="left:64.1%;top:25%;width:30.8%;height:56.8%;">
-          <img class="bg-img" src="slide2_img1.jpg" alt="Galería Urra Hip-Hip" />
-        </div>
-
-        <div class="exp-title">EXPERIENCIA</div>
-
-        <!-- 02 Fundación Andreani -->
-        <div class="exp-number" style="left:0.6%;top:15.5%;">02</div>
-        <div class="exp-info" style="left:5.5%;top:16.9%;">
-          <div class="org">FUNDACION ANDREANI</div>
-          <div class="role">2024-2025, MEDIADOR CULTURAL.</div>
-        </div>
-        <div class="exp-desc" style="left:4.6%;top:87%;width:47%;">
-          Gestión de grupos de hasta 60 personas en entornos museísticos, garantizando la calidad del relato institucional y la fidelización del público a través de estrategias de mediación crítica.
-        </div>
-
-        <!-- 03 Galería Urra -->
-        <div class="exp-number" style="left:59.6%;top:14.3%;">03</div>
-        <div class="exp-info" style="left:65.5%;top:16.2%;">
-          <div class="org">GALERIA URRA HIP-HIP</div>
-          <div class="role">2024, ASISTENTE DE GALERÍA DE ARTE.</div>
-        </div>
-        <div class="exp-desc" style="left:62%;top:84.8%;width:37%;">
-          Atención al cliente y asesoramiento comercial para coleccionistas, facilitando el proceso de venta mediante un conocimiento profundo del mercado de arte y la producción de los artistas residentes.
-        </div>
-
-        <!-- Video Andreani -->
-        <div class="play-btn" id="play-andreani" style="left:25%;top:51.6%;width:5.3%;height:9.3%;"
-          data-video-id="sqxaf2ckxe" data-aspect="landscape" data-title="Fundación Andreani – Mediación Cultural">
-          <img src="slide2_img2.png" alt="Ver video Fundación Andreani" />
-        </div>
-      </div>
-
-      <!-- SLIDE 4 – EXPERIENCIA 04 & 05: MACAB Y PASTO -->
-      <div class="slide" id="slide-4">
-        <div class="shape" style="left:1.64%;top:26.53%;width:21.23%;height:46.95%;">
-          <img class="bg-img" src="slide3_img1.png" alt="" style="object-position:center top;" />
-        </div>
-        <div class="shape" style="left:16.6%;top:15.44%;width:26.36%;height:62.48%;">
-          <img class="bg-img" src="slide3_img0.jpg" alt="MACAB" style="object-position:center center;" />
-        </div>
-        <div class="shape" style="left:67.54%;top:15.44%;width:24.06%;height:57.04%;">
-          <img class="bg-img" src="slide3_img2.jpg" alt="Galería Pasto" style="object-position:center center;" />
-        </div>
-
-        <!-- 04 MACAB -->
-        <div class="exp-number" style="left:0%;top:0.46%;">04</div>
-        <div class="exp-info" style="left:6.45%;top:2.55%;">
-          <div class="org">MACAB (MUSEO DE ARTE CONTEMPORANEO)</div>
-          <div class="role">2025, ASISTENCIA EN MONTAJE DE OBRA.</div>
-        </div>
-        <div class="exp-desc" style="left:7.35%;top:78.58%;width:31%;">
-          Asistencia técnica en la instalación de exhibiciones de gran formato, colaborando estrechamente con artistas y curadores para la correcta implementación de requerimientos espaciales y lumínicos.
-        </div>
-
-        <!-- 05 Galería Pasto -->
-        <div class="exp-number" style="left:59.68%;top:0.62%;">05</div>
-        <div class="exp-info" style="left:66.65%;top:1.86%;">
-          <div class="org">GALERIA PASTO</div>
-          <div class="role">2024-2025, ASISTENTE DE GALERÍA.</div>
-        </div>
-        <div class="exp-desc" style="left:65.85%;top:76.97%;width:28%;">
-          Soporte operativo en la gestión de trastienda e inventario, incluyendo el acondicionamiento, embalaje técnico para transporte nacional e internacional y actualización de bases de datos.
-        </div>
-
-        <!-- Video MACAB -->
-        <div class="play-btn" id="play-macab" style="left:17.62%;top:42.01%;width:5.25%;height:9.34%;"
-          data-video-id="gmadd5f6iy" data-aspect="portrait" data-title="MACAB – Montaje de Obra">
-          <img src="slide3_img3.png" alt="Ver video MACAB" />
-        </div>
-
-        <!-- Video Pasto -->
-        <div class="play-btn" id="play-pasto" style="left:76.94%;top:42.01%;width:5.25%;height:9.34%;"
-          data-video-id="rj9uddmup6" data-aspect="portrait" data-title="Galería Pasto – Catalogación y Embalaje">
-          <img src="slide3_img3.png" alt="Ver video Galería Pasto" />
-        </div>
-      </div>
-
-      <!-- SLIDE 5 – FILOSOFÍA -->
-      <div class="slide" id="slide-5">
-        <div class="shape" style="left:5.6%;top:7.3%;width:34.9%;height:82.7%;">
-          <img class="bg-img" src="slide4_img0.jpg" alt="" />
-        </div>
-        <div class="philosophy">
-          Lo que más me gusta hacer es generar experiencias mediante el arte.<br>
-          Poder brindar un relato que despierte interés<br>
-          en todo lo que habita el espacio.
-        </div>
-      </div>
-
-      <!-- SLIDE 6 – CONTACTO -->
-      <div class="slide" id="slide-6">
-        <div class="shape" style="left:56.1%;top:7.2%;width:31.4%;height:85.5%;">
-          <img class="bg-img" src="slide5_img0.jpg" alt="" />
-        </div>
-        <div class="contact-title">CONTACTA<br>CONMIGO</div>
-        <div class="contact-info">
-          LLAMAME AL <strong>637 89 19 26</strong><br>
-          ESCRIBIME EN <a class="contact-email" href="mailto:tobias.beme@gmail.com">TOBIAS.BEME@GMAIL.COM</a>
-        </div>
-        
-        <div class="access-projects iframe-btn" data-url="https://drive.google.com/embeddedfolderview?id=1WrzIlZTF3-NLVjS8-mxcH74orq0vjNrU#list" data-aspect="landscape" data-title="Google Drive – Proyectos">
-          ACCESO A MAS PROYECTOS
-        </div>
-
-        <div class="contact-country">ESPAÑA.</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- VIDEO MODAL -->
-  <div id="video-modal" role="dialog" aria-modal="true" aria-label="Reproductor de video">
-    <div id="modal-inner">
-      <p id="modal-title"></p>
-      <button id="modal-close" aria-label="Cerrar video">✕</button>
-      <div class="modal-ratio">
-        <iframe id="modal-iframe" allow="autoplay; fullscreen" allowfullscreen src="about:blank"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <!-- NAVEGACIÓN (7 SLIDES) -->
-  <nav id="nav" aria-label="Navegación de diapositivas">
-    <button class="nav-btn" id="btn-prev" aria-label="Anterior" disabled>
-      <svg viewBox="0 0 24 24">
-        <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z" />
-      </svg>
-    </button>
-    <div class="dot-nav" id="dot-nav"></div>
-    <span id="slide-counter">1 / 7</span>
-    <button class="nav-btn" id="btn-next" aria-label="Siguiente">
-      <svg viewBox="0 0 24 24">
-        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
-      </svg>
-    </button>
-  </nav>
-
-  <script>
-    (() => {
-      const TOTAL = 7;
-      let current = 0;
-      const slides = document.querySelectorAll('.slide');
-      const prevBtn = document.getElementById('btn-prev');
-      const nextBtn = document.getElementById('btn-next');
-      const counter = document.getElementById('slide-counter');
-      const dotNav = document.getElementById('dot-nav');
-      const viewport = document.getElementById('slide-viewport');
-      const modal = document.getElementById('video-modal');
-      const modalIframe = document.getElementById('modal-iframe');
-      const modalTitle = document.getElementById('modal-title');
-      const modalClose = document.getElementById('modal-close');
-
-      for (let i = 0; i < TOTAL; i++) {
-        const dot = document.createElement('button');
-        dot.className = 'dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', `Ir a diapositiva ${i + 1}`);
-        dot.addEventListener('click', () => goTo(i));
-        dotNav.appendChild(dot);
-      }
-
-      function updateDots() {
-        dotNav.querySelectorAll('.dot').forEach((d, i) => {
-          d.classList.toggle('active', i === current);
-        });
-      }
-
-      function scaleViewport() {
-        const ww = window.innerWidth;
-        const wh = window.innerHeight;
-        const navH = 90;
-        const sw = 1600;
-        const sh = 900;
-
-        const scale = Math.min(ww / sw, (wh - navH) / sh);
-        const ox = (ww - sw * scale) / 2;
-        const oy = (wh - navH - sh * scale) / 2;
-
-        viewport.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
-      }
-
-      function goTo(n) {
-        slides[current].classList.remove('active');
-        current = Math.max(0, Math.min(TOTAL - 1, n));
-        slides[current].classList.add('active');
-        prevBtn.disabled = current === 0;
-        nextBtn.disabled = current === TOTAL - 1;
-        counter.textContent = `${current + 1} / ${TOTAL}`;
-        updateDots();
-      }
-
-      prevBtn.addEventListener('click', () => goTo(current - 1));
-      nextBtn.addEventListener('click', () => goTo(current + 1));
-
-      document.addEventListener('keydown', (e) => {
-        if (modal.classList.contains('open')) {
-          if (e.key === 'Escape') closeModal();
+        } else {
+          alert("El video de esta sección aún se está procesando.");
           return;
         }
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
-      });
 
-      const modalInner = document.getElementById('modal-inner');
-
-      function openModal(videoIdOrUrl, title, aspect, type = 'wistia') {
-        if (aspect === 'portrait') {
-          modalInner.classList.add('portrait');
-        } else {
-          modalInner.classList.remove('portrait');
-        }
-        
-        let src;
-        if (type === 'iframe') {
-          src = videoIdOrUrl;
-        } else {
-          src = `https://fast.wistia.net/embed/iframe/${videoIdOrUrl}?videoFoam=true&playbar=true&volumeControl=true&settingsControl=true&endVideoBehavior=default`;
-        }
-        
         modalIframe.src = src;
-        modalTitle.textContent = title;
+        modalTitle.textContent = title || '';
         modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
       }
 
       function closeModal() {
         modal.classList.remove('open');
         modalInner.classList.remove('portrait');
         modalIframe.src = 'about:blank';
-        document.body.style.overflow = '';
       }
 
-      modalClose.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => {
+      modalClose.onclick = closeModal;
+      modal.onclick = (e) => {
         if (e.target === modal) closeModal();
-      });
+      };
 
+      // Activar clics en botones de play
       document.querySelectorAll('.play-btn, .iframe-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
           const id = btn.dataset.videoId;
           const url = btn.dataset.url;
           const title = btn.dataset.title;
           const aspect = btn.dataset.aspect || 'landscape';
-          
-          if (id) {
+
+          if (id !== undefined && id !== "") {
             openModal(id, title, aspect, 'wistia');
           } else if (url) {
             openModal(url, title, aspect, 'iframe');
+          } else {
+            openModal('', title, aspect, 'wistia');
           }
         });
       });
 
       window.addEventListener('resize', scaleViewport);
       scaleViewport();
-    })();
+      goTo(0);
+    });
   </script>
 </body>
 
