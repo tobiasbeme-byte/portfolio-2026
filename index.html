@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tobias Diaz – Portfolio Mediador Cultural 2026</title>
   <meta name="description"
-    content="Portfolio interactivo de Tobias Diaz, Mediador Cultural y Asistente de Galerías." />
+    content="Portfolio de Tobias Diaz, Mediador Cultural y Asistente de Galerías." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap"
@@ -21,7 +21,8 @@
     }
 
     :root {
-      --fg: #EDECED;
+      --fg: #FFFFFF;
+      --sub: #C0BFC2;
       --bg: #000000;
       --slide-w: 1600px;
       --slide-h: 900px;
@@ -86,7 +87,7 @@
       display: block;
     }
 
-    /* ── NAVEGACIÓN INFERIOR (MÁXIMA PRIORIDAD) ── */
+    /* ── NAVEGACIÓN INFERIOR ── */
     #nav {
       position: fixed;
       bottom: 24px;
@@ -95,13 +96,13 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      z-index: 9999; /* Asegura clics sin interferencia */
-      background: rgba(18, 18, 18, 0.9);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      z-index: 9999;
+      background: rgba(18, 18, 18, 0.88);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 50px;
       padding: 10px 24px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.85);
       pointer-events: auto;
     }
 
@@ -113,8 +114,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       transition: background 0.2s, opacity 0.2s;
       opacity: 0.85;
@@ -168,13 +169,13 @@
       transform: scale(1.4);
     }
 
-    /* ── MODAL VISOR MULTIMEDIA ── */
+    /* ── MODAL VISOR ── */
     #video-modal {
       display: none;
       position: fixed;
       inset: 0;
       z-index: 10000;
-      background: rgba(0, 0, 0, 0.95);
+      background: rgba(0, 0, 0, 0.94);
       align-items: center;
       justify-content: center;
       animation: fadeIn 0.25s ease;
@@ -265,14 +266,14 @@
     }
 
     .play-btn:hover {
-      transform: scale(1.12);
+      transform: scale(1.14);
     }
 
     .play-btn img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.7));
+      filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.75));
       pointer-events: none;
     }
 
@@ -353,28 +354,26 @@
       text-align: right;
     }
 
-    /* ── ENCABEZADOS EXPERIENCIA ── */
-    .exp-title-clean {
-      position: absolute;
-      right: 3.5%;
-      top: 2.5%;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 110px;
-      color: var(--fg);
-      letter-spacing: -0.01em;
-      line-height: 0.9;
-    }
-
+    /* ── FORMATOS COMUNES DE EXPERIENCIA ── */
     .exp-num {
       position: absolute;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 68px;
+      font-size: 64px;
       color: var(--fg);
       line-height: 1;
     }
 
     .exp-header {
       position: absolute;
+    }
+
+    .exp-header .exp-section-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 38px;
+      letter-spacing: 0.05em;
+      color: var(--fg);
+      margin-bottom: 2px;
+      line-height: 1;
     }
 
     .exp-header .org {
@@ -386,9 +385,9 @@
     }
 
     .exp-header .role {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 600;
-      color: #C0BFC2;
+      color: var(--sub);
       text-transform: uppercase;
       letter-spacing: 0.04em;
       margin-top: 2px;
@@ -404,9 +403,9 @@
     /* ── SLIDE 5: FILOSOFÍA ── */
     #slide-5 .philosophy {
       position: absolute;
-      left: 46%;
+      left: 45%;
       top: 24%;
-      width: 48%;
+      width: 49%;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 54px;
       color: var(--fg);
@@ -414,33 +413,54 @@
       letter-spacing: 0.02em;
     }
 
-    /* ── SLIDE 6: CONTACTO Y DRIVE ── */
+    /* ── SLIDE 6: CONTACTO FIEL AL PDF ── */
     #slide-6 .contact-title {
       position: absolute;
-      left: 3%;
-      top: 4%;
+      left: 3.5%;
+      top: 5%;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 104px;
       color: var(--fg);
       line-height: 1;
     }
 
+    #slide-6 .access-projects-link {
+      position: absolute;
+      left: 3.5%;
+      top: 32%;
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      display: inline-block;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      padding-bottom: 4px;
+      transition: border-color 0.2s, opacity 0.2s;
+    }
+
+    #slide-6 .access-projects-link:hover {
+      border-color: #FFFFFF;
+      opacity: 0.8;
+    }
+
     #slide-6 .contact-info {
       position: absolute;
-      left: 3%;
-      bottom: 15%;
-      font-size: 25px;
+      left: 3.5%;
+      bottom: 14%;
+      font-size: 24px;
       color: var(--fg);
-      line-height: 2.1;
+      line-height: 2;
       text-transform: uppercase;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.06em;
     }
 
     #slide-6 .contact-country {
       position: absolute;
-      left: 3%;
+      left: 3.5%;
       bottom: 5%;
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 700;
       color: var(--fg);
       text-transform: uppercase;
@@ -451,34 +471,6 @@
       color: #FFFFFF;
       text-decoration: underline;
       text-underline-offset: 4px;
-    }
-
-    #slide-6 .access-projects {
-      position: absolute;
-      left: 3%;
-      top: 48%;
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: #FFFFFF;
-      color: #000000;
-      font-size: 18px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 14px 28px;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
-      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
-      border: none;
-      z-index: 20;
-    }
-
-    #slide-6 .access-projects:hover {
-      background: #EDEDED;
-      transform: translateY(-2px);
     }
   </style>
 </head>
@@ -522,30 +514,30 @@
         <div class="section-title">SOBRE MÍ</div>
       </div>
 
-      <!-- SLIDE 2 – EXPERIENCIA 01: CATEDRAL DE BILBAO -->
+      <!-- SLIDE 2 – EXPERIENCIA 01: CATEDRAL DE BILBAO (Fiel al PDF) -->
       <div class="slide" id="slide-2">
         <div class="exp-num" style="left:3.5%;top:3.5%;">01</div>
-        <div class="exp-header" style="left:9%;top:4.2%;">
+        <div class="exp-header" style="left:8%;top:3.5%;">
+          <div class="exp-section-label">EXPERIENCIA</div>
           <div class="org">CATEDRAL DE BILBAO</div>
           <div class="role">2026, TÉCNICO EN ATENCIÓN AL VISITANTE</div>
         </div>
 
-        <div class="exp-title-clean">EXPERIENCIA</div>
-
         <!-- 3 fotos de la Catedral -->
-        <div class="shape" style="left:3.5%;top:17%;width:29.5%;height:66%;">
+        <div class="shape" style="left:3.5%;top:18%;width:29.5%;height:65%;">
           <img class="bg-img" src="slide2_catedral1.jpg" alt="Catedral de Bilbao" />
         </div>
-        <div class="shape" style="left:35.2%;top:17%;width:29.5%;height:66%;">
+        <div class="shape" style="left:35.2%;top:18%;width:29.5%;height:65%;">
           <img class="bg-img" src="slide2_catedral2.jpg" alt="Nave Central" />
         </div>
-        <div class="shape" style="left:67%;top:17%;width:29.5%;height:66%;">
+        <div class="shape" style="left:67%;top:18%;width:29.5%;height:65%;">
           <img class="bg-img" src="slide2_catedral3.jpg" alt="Atención al público" />
         </div>
 
-        <!-- BOTÓN PLAY CATEDRAL (Enlace listo para video vertical) -->
-        <div class="play-btn" id="play-catedral" style="left:47%;top:46%;width:5.5%;height:9.5%;"
-          data-video-id="" data-aspect="portrait" data-title="Catedral de Bilbao – Atención y Visitas Guiadas">
+        <!-- Botón Play conectado al video de Wistia -->
+        <div class="play-btn" id="play-catedral" style="left:47%;top:46%;width:5.8%;height:10%;"
+          data-video-url="https://fast.wistia.net/embed/iframe/pz0yfj45j986v9s"
+          data-aspect="portrait" data-title="Catedral de Bilbao – Atención y Visitas Guiadas">
           <img src="slide3_img3.png" alt="Ver video Catedral" />
         </div>
 
@@ -554,11 +546,11 @@
         </div>
       </div>
 
-      <!-- SLIDE 3 – EXPERIENCIA 02 & 03: ANDREANI Y URRA -->
+      <!-- SLIDE 3 – EXPERIENCIA 02 & 03: ANDREANI Y URRA (Sin título duplicado) -->
       <div class="slide" id="slide-3">
         <!-- 02 Fundación Andreani -->
         <div class="exp-num" style="left:3.5%;top:4%;">02</div>
-        <div class="exp-header" style="left:9%;top:4.5%;">
+        <div class="exp-header" style="left:8.5%;top:4.5%;">
           <div class="org">FUNDACION ANDREANI</div>
           <div class="role">2024-2025, MEDIADOR CULTURAL</div>
         </div>
@@ -591,7 +583,7 @@
       <div class="slide" id="slide-4">
         <!-- 04 MACAB -->
         <div class="exp-num" style="left:3.5%;top:4%;">04</div>
-        <div class="exp-header" style="left:9%;top:4.5%;">
+        <div class="exp-header" style="left:8.5%;top:4.5%;">
           <div class="org">MACAB (MUSEO DE ARTE CONTEMPORANEO)</div>
           <div class="role">2025, ASISTENCIA EN MONTAJE DE OBRA</div>
         </div>
@@ -638,24 +630,25 @@
         </div>
       </div>
 
-      <!-- SLIDE 6 – CONTACTO -->
+      <!-- SLIDE 6 – CONTACTO Y MÁS PROYECTOS -->
       <div class="slide" id="slide-6">
         <div class="contact-title">CONTACTA<br>CONMIGO</div>
 
-        <button class="access-projects iframe-btn"
+        <!-- Texto idéntico al PDF original -->
+        <div class="access-projects-link iframe-btn"
           data-url="https://drive.google.com/embeddedfolderview?id=1WrzIlZTF3-NLVjS8-mxcH74orq0vjNrU#list"
           data-aspect="landscape" data-title="Google Drive – Proyectos">
-          ACCESO A MÁS PROYECTOS
-        </button>
+          ACCESO A MAS PROYECTOS
+        </div>
 
         <div class="contact-info">
-          LLÁMAME AL <strong>637 89 19 26</strong><br>
+          LLAMAME AL <strong>637 89 19 26</strong><br>
           ESCRIBIME EN <a class="contact-email" href="mailto:tobias.beme@gmail.com">TOBIAS.BEME@GMAIL.COM</a>
         </div>
         <div class="contact-country">ESPAÑA.</div>
 
         <div class="shape" style="left:56%;top:7%;width:32%;height:86%;">
-          <img class="bg-img" src="slide5_img0.jpg" onerror="this.src='slide5_img0.png'" alt="Contacto" />
+          <img class="bg-img" src="slide5_img0.jpg" alt="Contacto" />
         </div>
       </div>
 
@@ -673,7 +666,7 @@
     </div>
   </div>
 
-  <!-- NAVEGACIÓN BLINDADA -->
+  <!-- NAVEGACIÓN BLINDADA (7 SLIDES) -->
   <nav id="nav" aria-label="Navegación de diapositivas">
     <button class="nav-btn" id="btn-prev" aria-label="Anterior">
       <svg viewBox="0 0 24 24">
@@ -704,7 +697,7 @@
       const modalTitle = document.getElementById('modal-title');
       const modalClose = document.getElementById('modal-close');
 
-      // Crear puntos de navegación
+      // Crear puntos
       dotNav.innerHTML = '';
       for (let i = 0; i < TOTAL; i++) {
         const dot = document.createElement('button');
@@ -749,7 +742,6 @@
         updateDots();
       }
 
-      // Eventos de botones
       prevBtn.onclick = (e) => {
         e.stopPropagation();
         if (current > 0) goTo(current - 1);
@@ -760,7 +752,6 @@
         if (current < TOTAL - 1) goTo(current + 1);
       };
 
-      // Teclado
       window.addEventListener('keydown', (e) => {
         if (modal.classList.contains('open')) {
           if (e.key === 'Escape') closeModal();
@@ -774,24 +765,13 @@
         }
       });
 
-      // Modales
       const modalInner = document.getElementById('modal-inner');
 
-      function openModal(videoIdOrUrl, title, aspect, type = 'wistia') {
+      function openModal(src, title, aspect) {
         if (aspect === 'portrait') {
           modalInner.classList.add('portrait');
         } else {
           modalInner.classList.remove('portrait');
-        }
-
-        let src = '';
-        if (type === 'iframe') {
-          src = videoIdOrUrl;
-        } else if (videoIdOrUrl) {
-          src = `https://fast.wistia.net/embed/iframe/${videoIdOrUrl}?videoFoam=true&playbar=true&volumeControl=true&settingsControl=true&endVideoBehavior=default`;
-        } else {
-          alert("El video de esta sección aún se está procesando.");
-          return;
         }
 
         modalIframe.src = src;
@@ -810,21 +790,23 @@
         if (e.target === modal) closeModal();
       };
 
-      // Activar clics en botones de play
+      // Disparador de modales para videos y proyectos
       document.querySelectorAll('.play-btn, .iframe-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const id = btn.dataset.videoId;
+          const directUrl = btn.dataset.videoUrl;
           const url = btn.dataset.url;
           const title = btn.dataset.title;
           const aspect = btn.dataset.aspect || 'landscape';
 
-          if (id !== undefined && id !== "") {
-            openModal(id, title, aspect, 'wistia');
+          if (directUrl) {
+            openModal(directUrl, title, aspect);
+          } else if (id) {
+            const wistiaSrc = `https://fast.wistia.net/embed/iframe/${id}?videoFoam=true&playbar=true&volumeControl=true&settingsControl=true&endVideoBehavior=default`;
+            openModal(wistiaSrc, title, aspect);
           } else if (url) {
-            openModal(url, title, aspect, 'iframe');
-          } else {
-            openModal('', title, aspect, 'wistia');
+            openModal(url, title, aspect);
           }
         });
       });
