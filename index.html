@@ -37,7 +37,6 @@
       overflow: hidden;
     }
 
-    /* ── PRESENTATION SHELL (ORIGINAL EXACTO) ── */
     #presentation {
       position: fixed;
       inset: 0;
@@ -54,7 +53,6 @@
       transform-origin: 0 0;
     }
 
-    /* ── SLIDES ── */
     .slide {
       position: absolute;
       inset: 0;
@@ -72,7 +70,6 @@
       pointer-events: all;
     }
 
-    /* ── SHAPE LAYER ── */
     .shape {
       position: absolute;
       overflow: hidden;
@@ -85,13 +82,11 @@
       display: block;
     }
 
-    /* ── TEXT BOXES ── */
     .textbox {
       position: absolute;
       color: var(--fg);
     }
 
-    /* ── NAVIGATION (ORIGINAL EXACTO) ── */
     #nav {
       position: fixed;
       bottom: 24px;
@@ -167,7 +162,6 @@
       transform: scale(1.4);
     }
 
-    /* ── VIDEO MODAL ── */
     #video-modal {
       display: none;
       position: fixed;
@@ -249,7 +243,6 @@
       opacity: 1;
     }
 
-    /* ── PLAY BUTTON OVERLAY ── */
     .play-btn {
       position: absolute;
       cursor: pointer;
@@ -349,7 +342,7 @@
       text-align: right;
     }
 
-    /* ── SLIDE 2: EXPERIENCIA 01 CATEDRAL DE BILBAO (DISEÑO EXACTO CANVA) ── */
+    /* ── SLIDE 2: EXPERIENCIA 01 CATEDRAL DE BILBAO ── */
     #slide-2 .exp-title-canva {
       position: absolute;
       left: 50%;
@@ -413,7 +406,7 @@
       line-height: 1.5;
     }
 
-    /* ── SLIDE 3 & 4: EXPERIENCIAS ── */
+    /* ── SLIDES 3 & 4 ── */
     .exp-title {
       position: absolute;
       left: 21%;
@@ -601,8 +594,9 @@
           <img class="bg-img" src="slide2_catedral3.jpg" alt="Atención al público" />
         </div>
 
+        <!-- Botón con el ID real de Wistia -->
         <div class="play-btn" id="play-catedral" style="left:47%;top:50%;width:5.5%;height:9.5%;"
-          data-video-id="pz0yfj45j986v9s" data-aspect="portrait" data-title="Catedral de Bilbao – Atención y Visitas Guiadas">
+          data-video-id="i2kx9887no" data-aspect="portrait" data-title="Catedral de Bilbao – Atención y Visitas Guiadas">
           <img src="slide3_img3.png" alt="Ver video Catedral" />
         </div>
 
@@ -783,7 +777,6 @@
         });
       }
 
-      // FÓRMULA MATEMÁTICA EXACTA ORIGINAL
       function scaleViewport() {
         const ww = window.innerWidth;
         const wh = window.innerHeight;
