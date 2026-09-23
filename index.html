@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Tobias Diaz – Porfolio Mediador Cultural 2026</title>
   <meta name="description"
     content="Portfolio de Tobias Diaz, Mediador Cultural y Asistente de Galerías." />
@@ -36,6 +36,7 @@
       font-family: 'Inter', sans-serif;
       overflow: hidden;
       color: var(--fg);
+      touch-action: pan-y;
     }
 
     #presentation {
@@ -98,6 +99,18 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 50px;
       padding: 10px 22px;
+    }
+
+    @media (max-width: 768px) {
+      #nav {
+        bottom: 16px;
+        padding: 6px 16px;
+        gap: 10px;
+      }
+      .nav-btn {
+        width: 32px;
+        height: 32px;
+      }
     }
 
     .nav-btn {
@@ -571,10 +584,10 @@
           <img class="bg-img" src="slide2_catedral1.jpg" alt="Catedral 1" />
         </div>
         <div class="shape" style="left:35.2%;top:24%;width:29.5%;height:61%;">
-          <img class="bg-img" src="slide2_catedral2.jpg" alt="Catedral 2" />
+          <img class="bg-img" src="slide2_catedral2.jpg" alt="Nave Central" />
         </div>
         <div class="shape" style="left:67%;top:24%;width:29.5%;height:61%;">
-          <img class="bg-img" src="slide2_catedral3.jpg" alt="Catedral 3" />
+          <img class="bg-img" src="slide2_catedral3.jpg" alt="Atención al público" />
         </div>
 
         <div class="play-btn" id="play-catedral" style="left:47%;top:50%;width:5.5%;height:9.5%;"
@@ -628,12 +641,10 @@
           <div class="role">2025, ASISTENCIA EN MONTAJE DE OBRA.</div>
         </div>
 
-        <!-- Sala grande de fondo a la derecha -->
         <div class="shape" style="left:17.5%;top:14%;width:29.5%;height:68%;z-index:1;">
           <img class="bg-img" src="slide3_img0.jpg" alt="MACAB Sala" />
         </div>
 
-        <!-- Montaje de obra a la izquierda -->
         <div class="shape" style="left:3.5%;top:20%;width:21.5%;height:62%;z-index:2;box-shadow: -4px 0 25px rgba(0,0,0,0.7);">
           <img class="bg-img" src="slide3_img1.png" alt="Montaje obra" />
         </div>
@@ -667,7 +678,7 @@
         </div>
       </div>
 
-      <!-- SLIDE 5 – FILOSOFÍA (FOTO CON RESOLUCIÓN MULTI-RUTA) -->
+      <!-- SLIDE 5 – FILOSOFÍA -->
       <div class="slide" id="slide-5">
         <div class="shape" style="left:5.6%;top:7.3%;width:34.9%;height:82.7%;">
           <img class="bg-img auto-img"
@@ -684,7 +695,7 @@
         </div>
       </div>
 
-      <!-- SLIDE 6 – CONTACTO (FOTO CON RESOLUCIÓN MULTI-RUTA) -->
+      <!-- SLIDE 6 – CONTACTO -->
       <div class="slide" id="slide-6">
         <div class="shape" style="left:56.1%;top:7.2%;width:31.4%;height:85.5%;">
           <img class="bg-img auto-img"
@@ -750,7 +761,6 @@
       const modalTitle = document.getElementById('modal-title');
       const modalClose = document.getElementById('modal-close');
 
-      // Carga infalible de imágenes en cascada
       document.querySelectorAll('.auto-img').forEach(img => {
         const sources = img.dataset.srcs.split(',');
         let idx = 0;
@@ -776,16 +786,27 @@
         });
       }
 
+      // ESCALADO UNIVERSAL (ORDENADOR Y MÓVIL)
       function scaleViewport() {
         const ww = window.innerWidth;
         const wh = window.innerHeight;
-        const navH = 90;
+        const navH = ww < 768 ? 70 : 90;
         const sw = 1600;
         const sh = 900;
 
-        const scale = Math.min(ww / sw, (wh - navH) / sh);
-        const ox = (ww - sw * scale) / 2;
-        const oy = (wh - navH - sh * scale) / 2;
+        let scale, ox, oy;
+
+        if (ww < 768 && wh > ww) {
+          // Móvil en vertical: se ajusta al ancho completo y se centra verticalmente
+          scale = ww / sw;
+          ox = 0;
+          oy = (wh - navH - sh * scale) / 2;
+        } else {
+          // Ordenador y móvil horizontal: mantiene la relación de aspecto sin recortes
+          scale = Math.min(ww / sw, (wh - navH) / sh);
+          ox = (ww - sw * scale) / 2;
+          oy = (wh - navH - sh * scale) / 2;
+        }
 
         viewport.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
       }
@@ -802,6 +823,20 @@
 
       prevBtn.addEventListener('click', () => goTo(current - 1));
       nextBtn.addEventListener('click', () => goTo(current + 1));
+
+      // SOPORTE TÁCTIL EN MÓVIL (SWIPE HORIZONTAL)
+      let touchStartX = 0;
+      let touchEndX = 0;
+      window.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      window.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        if (modal.classList.contains('open')) return;
+        if (touchStartX - touchEndX > 50) goTo(current + 1); // Deslizar a la izquierda: siguiente
+        if (touchEndX - touchStartX > 50) goTo(current - 1); // Deslizar a la derecha: anterior
+      }, { passive: true });
 
       document.addEventListener('keydown', (e) => {
         if (modal.classList.contains('open')) {
@@ -860,6 +895,7 @@
       });
 
       window.addEventListener('resize', scaleViewport);
+      window.addEventListener('orientationchange', scaleViewport);
       scaleViewport();
     })();
   </script>
