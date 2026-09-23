@@ -35,6 +35,7 @@
       background: #000;
       font-family: 'Inter', sans-serif;
       overflow: hidden;
+      color: var(--fg);
     }
 
     #presentation {
@@ -82,7 +83,7 @@
       display: block;
     }
 
-    /* ── BARRA DE NAVEGACIÓN ORIGINAL ── */
+    /* ── NAVEGACIÓN ── */
     #nav {
       position: fixed;
       bottom: 24px;
@@ -335,7 +336,7 @@
       text-align: right;
     }
 
-    /* ── SLIDE 2: CATEDRAL DE BILBAO (CANVA EXACTO) ── */
+    /* ── SLIDE 2: CATEDRAL DE BILBAO ── */
     #slide-2 .exp-title-canva {
       position: absolute;
       left: 50%;
@@ -576,7 +577,6 @@
           <img class="bg-img" src="slide2_catedral3.jpg" alt="Catedral 3" />
         </div>
 
-        <!-- Video Catedral con Wistia ID real -->
         <div class="play-btn" id="play-catedral" style="left:47%;top:50%;width:5.5%;height:9.5%;"
           data-video-id="i2kx9887no" data-aspect="portrait" data-title="Catedral de Bilbao – Visitas Guiadas">
           <img src="slide3_img3.png" alt="Play Catedral" />
@@ -596,7 +596,6 @@
           <img class="bg-img" src="slide2_img1.jpg" alt="Galería Urra Hip-Hip" />
         </div>
 
-        <!-- 02 Andreani -->
         <div class="exp-number" style="left:0.6%;top:15.5%;">02</div>
         <div class="exp-info" style="left:5.5%;top:16.9%;">
           <div class="org">FUNDACION ANDREANI</div>
@@ -606,7 +605,6 @@
           Gestión de grupos de hasta 60 personas en entornos museísticos, garantizando la calidad del relato institucional y la fidelización del público a través de estrategias de mediación crítica.
         </div>
 
-        <!-- 03 Urra -->
         <div class="exp-number" style="left:59.6%;top:14.3%;">03</div>
         <div class="exp-info" style="left:65.5%;top:16.2%;">
           <div class="org">GALERIA URRA HIP-HIP</div>
@@ -616,16 +614,14 @@
           Atención al cliente y asesoramiento comercial para coleccionistas, facilitando el proceso de venta mediante un conocimiento profundo del mercado de arte y la producción de los artistas residentes.
         </div>
 
-        <!-- Play Andreani -->
         <div class="play-btn" id="play-andreani" style="left:25%;top:51.6%;width:5.3%;height:9.3%;"
           data-video-id="sqxaf2ckxe" data-aspect="landscape" data-title="Fundación Andreani – Mediación Cultural">
           <img src="slide2_img2.png" alt="Play Andreani" />
         </div>
       </div>
 
-      <!-- SLIDE 4 – EXPERIENCIA 04 & 05: MACAB Y PASTO (CALCADO AL PDF) -->
+      <!-- SLIDE 4 – EXPERIENCIA 04 & 05: MACAB Y PASTO -->
       <div class="slide" id="slide-4">
-        <!-- 04 MACAB -->
         <div class="exp-number" style="left:3.5%;top:3.5%;">04</div>
         <div class="exp-info" style="left:8.5%;top:4.2%;">
           <div class="org">MACAB (MUSEO DE ARTE CONTEMPORANEO)</div>
@@ -642,7 +638,6 @@
           <img class="bg-img" src="slide3_img1.png" alt="Montaje obra" />
         </div>
 
-        <!-- Play MACAB centrado sobre el montaje -->
         <div class="play-btn" id="play-macab" style="left:12%;top:48%;width:5.5%;height:9.5%;z-index:10;"
           data-video-id="gmadd5f6iy" data-aspect="portrait" data-title="MACAB – Montaje de Obra">
           <img src="slide3_img3.png" alt="Play MACAB" />
@@ -652,7 +647,6 @@
           Asistencia técnica en la instalación de exhibiciones de gran formato, colaborando estrechamente con artistas y curadores para la correcta implementación de requerimientos espaciales y lumínicos.
         </div>
 
-        <!-- 05 Galería Pasto -->
         <div class="exp-number" style="left:57%;top:3.5%;">05</div>
         <div class="exp-info" style="left:62.5%;top:4.2%;">
           <div class="org">GALERIA PASTO</div>
@@ -663,7 +657,6 @@
           <img class="bg-img" src="slide3_img2.jpg" alt="Galería Pasto" />
         </div>
 
-        <!-- Play Pasto sobre la madera -->
         <div class="play-btn" id="play-pasto" style="left:72.5%;top:48%;width:5.5%;height:9.5%;z-index:10;"
           data-video-id="rj9uddmup6" data-aspect="portrait" data-title="Galería Pasto – Catalogación y Embalaje">
           <img src="slide3_img3.png" alt="Play Pasto" />
@@ -674,10 +667,12 @@
         </div>
       </div>
 
-      <!-- SLIDE 5 – FILOSOFÍA -->
+      <!-- SLIDE 5 – FILOSOFÍA (FOTO CON RESOLUCIÓN MULTI-RUTA) -->
       <div class="slide" id="slide-5">
-        <div class="shape" style="left:5.5%;top:8%;width:35%;height:82%;">
-          <img class="bg-img" src="slide4_img0.jpg" alt="Filosofía" />
+        <div class="shape" style="left:5.6%;top:7.3%;width:34.9%;height:82.7%;">
+          <img class="bg-img auto-img"
+            data-srcs="slide4_img0.jpg,assets/slide4_img0.jpg,slide4_img0.png,assets/slide4_img0.png"
+            src="slide4_img0.jpg" alt="" />
         </div>
         <div class="philosophy">
           Lo que más me gusta hacer es<br>
@@ -689,13 +684,16 @@
         </div>
       </div>
 
-      <!-- SLIDE 6 – CONTACTO -->
+      <!-- SLIDE 6 – CONTACTO (FOTO CON RESOLUCIÓN MULTI-RUTA) -->
       <div class="slide" id="slide-6">
+        <div class="shape" style="left:56.1%;top:7.2%;width:31.4%;height:85.5%;">
+          <img class="bg-img auto-img"
+            data-srcs="slide5_img0.jpg,assets/slide5_img0.jpg,slide5_img0.png,assets/slide5_img0.png,slide6_img0.jpg,assets/slide6_img0.jpg"
+            src="slide5_img0.jpg" alt="" />
+        </div>
         <div class="contact-title">CONTACTA<br>CONMIGO</div>
-
-        <div class="access-projects iframe-btn"
-          data-url="https://drive.google.com/embeddedfolderview?id=1WrzIlZTF3-NLVjS8-mxcH74orq0vjNrU#list"
-          data-aspect="landscape" data-title="Google Drive – Proyectos">
+        
+        <div class="access-projects iframe-btn" data-url="https://drive.google.com/embeddedfolderview?id=1WrzIlZTF3-NLVjS8-mxcH74orq0vjNrU#list" data-aspect="landscape" data-title="Google Drive – Proyectos">
           ACCESO A MAS PROYECTOS
         </div>
 
@@ -704,10 +702,6 @@
           ESCRIBIME EN <a class="contact-email" href="mailto:tobias.beme@gmail.com">TOBIAS.BEME@GMAIL.COM</a>
         </div>
         <div class="contact-country">ESPAÑA.</div>
-
-        <div class="shape" style="left:56%;top:7%;width:32%;height:86%;">
-          <img class="bg-img" src="slide5_img0.jpg" alt="Contacto" />
-        </div>
       </div>
 
     </div>
@@ -756,7 +750,18 @@
       const modalTitle = document.getElementById('modal-title');
       const modalClose = document.getElementById('modal-close');
 
-      dotNav.innerHTML = '';
+      // Carga infalible de imágenes en cascada
+      document.querySelectorAll('.auto-img').forEach(img => {
+        const sources = img.dataset.srcs.split(',');
+        let idx = 0;
+        img.onerror = () => {
+          idx++;
+          if (idx < sources.length) {
+            img.src = sources[idx];
+          }
+        };
+      });
+
       for (let i = 0; i < TOTAL; i++) {
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === 0 ? ' active' : '');
