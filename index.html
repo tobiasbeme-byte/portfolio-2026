@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tobias Diaz – Porfolio Mediador Cultural 2026</title>
   <meta name="description"
-    content="Portfolio de Tobias Diaz, Mediador Cultural y Asistente de Galerías. Experiencia en Fundación Andreani, MACAB, Galería Pasto y más." />
+    content="Portfolio de Tobias Diaz, Mediador Cultural y Asistente de Galerías." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap"
@@ -23,7 +23,6 @@
     :root {
       --fg: #EDECED;
       --bg: #000000;
-      --accent: #EDECED;
       --slide-w: 1600px;
       --slide-h: 900px;
     }
@@ -61,7 +60,7 @@
       background: #000;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.7s cubic-bezier(.4, 0, .2, 1);
+      transition: opacity 0.6s cubic-bezier(.4, 0, .2, 1);
       overflow: hidden;
     }
 
@@ -82,11 +81,7 @@
       display: block;
     }
 
-    .textbox {
-      position: absolute;
-      color: var(--fg);
-    }
-
+    /* ── NAVEGACIÓN ── */
     #nav {
       position: fixed;
       bottom: 24px;
@@ -96,9 +91,9 @@
       align-items: center;
       gap: 16px;
       z-index: 1000;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 50px;
       padding: 10px 20px;
     }
@@ -162,6 +157,7 @@
       transform: scale(1.4);
     }
 
+    /* ── VIDEO MODAL ── */
     #video-modal {
       display: none;
       position: fixed;
@@ -342,7 +338,7 @@
       text-align: right;
     }
 
-    /* ── SLIDE 2: EXPERIENCIA 01 CATEDRAL DE BILBAO ── */
+    /* ── SLIDE 2: CATEDRAL DE BILBAO (CANVA EXACTO) ── */
     #slide-2 .exp-title-canva {
       position: absolute;
       left: 50%;
@@ -406,18 +402,7 @@
       line-height: 1.5;
     }
 
-    /* ── SLIDES 3 & 4 ── */
-    .exp-title {
-      position: absolute;
-      left: 21%;
-      top: 1%;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 136px;
-      color: var(--fg);
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-
+    /* ── SLIDES 3 & 4 ESTILOS GENERALES ── */
     .exp-number {
       position: absolute;
       font-family: 'Bebas Neue', sans-serif;
@@ -448,72 +433,39 @@
 
     .exp-desc {
       position: absolute;
-      font-size: 19px;
+      font-size: 18px;
       color: var(--fg);
-      line-height: 1.55;
+      line-height: 1.5;
     }
 
     /* ── SLIDE 5: FILOSOFÍA ── */
     #slide-5 .philosophy {
       position: absolute;
       left: 46.3%;
-      top: 18.4%;
+      top: 24%;
       width: 50%;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 52px;
       color: var(--fg);
-      line-height: 1.15;
+      line-height: 1.2;
       letter-spacing: 0.02em;
     }
 
     /* ── SLIDE 6: CONTACTO ── */
     #slide-6 .contact-title {
       position: absolute;
-      left: 2%;
-      top: 2.8%;
+      left: 2.5%;
+      top: 4%;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 99px;
+      font-size: 102px;
       color: var(--fg);
-      line-height: 1.05;
-    }
-
-    #slide-6 .contact-info {
-      position: absolute;
-      left: 2%;
-      bottom: 14%;
-      font-size: 26px;
-      color: var(--fg);
-      line-height: 2.2;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    #slide-6 .contact-country {
-      position: absolute;
-      left: 2%;
-      bottom: 5%;
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--fg);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    #slide-6 .contact-email {
-      color: var(--fg);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(237, 236, 237, 0.4);
-      transition: border-color 0.2s;
-    }
-
-    #slide-6 .contact-email:hover {
-      border-color: var(--fg);
+      line-height: 1.02;
     }
 
     #slide-6 .access-projects {
       position: absolute;
-      left: 2%;
-      top: 36%;
+      left: 2.5%;
+      top: 32%;
       font-size: 21px;
       font-weight: 700;
       color: var(--fg);
@@ -530,6 +482,34 @@
       border-color: var(--fg);
       opacity: 0.8;
     }
+
+    #slide-6 .contact-info {
+      position: absolute;
+      left: 2.5%;
+      bottom: 14%;
+      font-size: 25px;
+      color: var(--fg);
+      line-height: 2.1;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    #slide-6 .contact-country {
+      position: absolute;
+      left: 2.5%;
+      bottom: 5%;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    #slide-6 .contact-email {
+      color: var(--fg);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
   </style>
 </head>
 
@@ -541,7 +521,7 @@
       <!-- SLIDE 0 – PORTADA -->
       <div class="slide active" id="slide-0">
         <div class="shape" style="left:0%;top:0%;width:43.2%;height:100%;">
-          <img class="bg-img" src="slide0_img0.jpg" alt="Portada" />
+          <img class="bg-img" src="slide0_img0.jpg" onerror="this.src='assets/slide0_img0.jpg'" alt="Portada" />
         </div>
         <div class="title-name">
           TOBIAS<br>DIAZ
@@ -553,13 +533,13 @@
       <!-- SLIDE 1 – SOBRE MÍ -->
       <div class="slide" id="slide-1">
         <div class="shape" style="left:5.5%;top:22.6%;width:28.1%;height:75%;">
-          <img class="bg-img" src="slide1_img0.jpg" alt="" />
+          <img class="bg-img" src="slide1_img0.jpg" onerror="this.src='assets/slide1_img0.jpg'" alt="" />
         </div>
         <div class="shape" style="left:1.4%;top:0%;width:34.2%;height:52.7%;">
-          <img class="bg-img" src="slide1_img1.jpg" alt="" />
+          <img class="bg-img" src="slide1_img1.jpg" onerror="this.src='assets/slide1_img1.jpg'" alt="" />
         </div>
         <div class="shape" style="left:34.1%;top:15.8%;width:31.6%;height:75%;">
-          <img class="bg-img" src="slide1_img2.jpg" alt="" />
+          <img class="bg-img" src="slide1_img2.jpg" onerror="this.src='assets/slide1_img2.jpg'" alt="" />
         </div>
 
         <div class="degree">LICENCIADO EN CURADURIA / MASTER EN COMUNICACIÓN</div>
@@ -585,19 +565,18 @@
         </div>
 
         <div class="shape" style="left:3.5%;top:24%;width:29.5%;height:61%;">
-          <img class="bg-img" src="slide2_catedral1.jpg" alt="Catedral de Bilbao" />
+          <img class="bg-img" src="slide2_catedral1.jpg" onerror="this.src='assets/slide2_catedral1.jpg'" alt="Catedral 1" />
         </div>
         <div class="shape" style="left:35.2%;top:24%;width:29.5%;height:61%;">
-          <img class="bg-img" src="slide2_catedral2.jpg" alt="Nave Central" />
+          <img class="bg-img" src="slide2_catedral2.jpg" onerror="this.src='assets/slide2_catedral2.jpg'" alt="Catedral 2" />
         </div>
         <div class="shape" style="left:67%;top:24%;width:29.5%;height:61%;">
-          <img class="bg-img" src="slide2_catedral3.jpg" alt="Atención al público" />
+          <img class="bg-img" src="slide2_catedral3.jpg" onerror="this.src='assets/slide2_catedral3.jpg'" alt="Catedral 3" />
         </div>
 
-        <!-- Botón con el ID real de Wistia -->
         <div class="play-btn" id="play-catedral" style="left:47%;top:50%;width:5.5%;height:9.5%;"
-          data-video-id="i2kx9887no" data-aspect="portrait" data-title="Catedral de Bilbao – Atención y Visitas Guiadas">
-          <img src="slide3_img3.png" alt="Ver video Catedral" />
+          data-video-id="i2kx9887no" data-aspect="portrait" data-title="Catedral de Bilbao – Visitas Guiadas">
+          <img src="slide3_img3.png" onerror="this.src='assets/slide3_img3.png'" alt="Play Catedral" />
         </div>
 
         <div class="desc-bottom">
@@ -607,114 +586,128 @@
 
       <!-- SLIDE 3 – EXPERIENCIA 02 & 03: ANDREANI Y URRA -->
       <div class="slide" id="slide-3">
-        <div class="shape" style="left:3.6%;top:25.2%;width:48.2%;height:62.1%;">
-          <img class="bg-img" src="slide2_img0.jpg" alt="Fundación Andreani" />
+        <div class="shape" style="left:3.6%;top:25.2%;width:48.2%;height:58%;">
+          <img class="bg-img" src="slide2_img0.jpg" onerror="this.src='assets/slide2_img0.jpg'" alt="Fundación Andreani" />
         </div>
         <div class="shape" style="left:64.1%;top:25%;width:30.8%;height:56.8%;">
-          <img class="bg-img" src="slide2_img1.jpg" alt="Galería Urra Hip-Hip" />
+          <img class="bg-img" src="slide2_img1.jpg" onerror="this.src='assets/slide2_img1.jpg'" alt="Galería Urra Hip-Hip" />
         </div>
 
-        <!-- 02 Fundación Andreani -->
+        <!-- 02 Andreani -->
         <div class="exp-number" style="left:0.6%;top:15.5%;">02</div>
         <div class="exp-info" style="left:5.5%;top:16.9%;">
           <div class="org">FUNDACION ANDREANI</div>
           <div class="role">2024-2025, MEDIADOR CULTURAL.</div>
         </div>
-        <div class="exp-desc" style="left:4.6%;top:87%;width:47%;">
-          Gestión de grupos de hasta 60 personas en entornos museísticos, garantizando la calidad del relato
-          institucional y la fidelización del público a través de estrategias de mediación crítica.
+        <div class="exp-desc" style="left:4.6%;top:85%;width:47%;">
+          Gestión de grupos de hasta 60 personas en entornos museísticos, garantizando la calidad del relato institucional y la fidelización del público a través de estrategias de mediación crítica.
         </div>
 
-        <!-- 03 Galería Urra -->
+        <!-- 03 Urra -->
         <div class="exp-number" style="left:59.6%;top:14.3%;">03</div>
         <div class="exp-info" style="left:65.5%;top:16.2%;">
           <div class="org">GALERIA URRA HIP-HIP</div>
           <div class="role">2024, ASISTENTE DE GALERÍA DE ARTE.</div>
         </div>
         <div class="exp-desc" style="left:62%;top:84.8%;width:37%;">
-          Atención al cliente y asesoramiento comercial para coleccionistas, facilitando el proceso de venta mediante un
-          conocimiento profundo del mercado de arte y la producción de los artistas residentes.
+          Atención al cliente y asesoramiento comercial para coleccionistas, facilitando el proceso de venta mediante un conocimiento profundo del mercado de arte y la producción de los artistas residentes.
         </div>
 
+        <!-- Play Andreani -->
         <div class="play-btn" id="play-andreani" style="left:25%;top:51.6%;width:5.3%;height:9.3%;"
           data-video-id="sqxaf2ckxe" data-aspect="landscape" data-title="Fundación Andreani – Mediación Cultural">
-          <img src="slide2_img2.png" alt="Ver video Fundación Andreani" />
+          <img src="slide2_img2.png" onerror="this.src='assets/slide2_img2.png'" alt="Play Andreani" />
         </div>
       </div>
 
-      <!-- SLIDE 4 – EXPERIENCIA 04 & 05: MACAB Y PASTO -->
+      <!-- SLIDE 4 – EXPERIENCIA 04 & 05: MACAB Y PASTO (MAQUETA LIMPIA IDÉNTICA AL PDF) -->
       <div class="slide" id="slide-4">
-        <div class="shape" style="left:1.64%;top:26.53%;width:21.23%;height:46.95%;">
-          <img class="bg-img" src="slide3_img1.png" alt="" style="object-position:center top;" />
-        </div>
-        <div class="shape" style="left:16.6%;top:15.44%;width:26.36%;height:62.48%;">
-          <img class="bg-img" src="slide3_img0.jpg" alt="MACAB" style="object-position:center center;" />
-        </div>
-        <div class="shape" style="left:67.54%;top:15.44%;width:24.06%;height:57.04%;">
-          <img class="bg-img" src="slide3_img2.jpg" alt="Galería Pasto" style="object-position:center center;" />
-        </div>
-
         <!-- 04 MACAB -->
-        <div class="exp-number" style="left:0%;top:0.46%;">04</div>
-        <div class="exp-info" style="left:6.45%;top:2.55%;">
+        <div class="exp-number" style="left:3.5%;top:3.5%;">04</div>
+        <div class="exp-info" style="left:8.5%;top:4.2%;">
           <div class="org">MACAB (MUSEO DE ARTE CONTEMPORANEO)</div>
           <div class="role">2025, ASISTENCIA EN MONTAJE DE OBRA.</div>
         </div>
-        <div class="exp-desc" style="left:7.35%;top:78.58%;width:31%;">
-          Asistencia técnica en la instalación de exhibiciones de gran formato, colaborando estrechamente con artistas y
-          curadores para la correcta implementación de requerimientos espaciales y lumínicos.
+
+        <!-- Foto tubo azul izquierda -->
+        <div class="shape" style="left:3.5%;top:18%;width:20%;height:64%;">
+          <img class="bg-img" src="slide3_img1.png" onerror="this.src='assets/slide3_img1.png'" alt="Montaje obra" />
+        </div>
+        <!-- Foto sala derecha -->
+        <div class="shape" style="left:24%;top:18%;width:28%;height:64%;">
+          <img class="bg-img" src="slide3_img0.jpg" onerror="this.src='assets/slide3_img0.jpg'" alt="MACAB Sala" />
+        </div>
+
+        <!-- Play MACAB sobre la foto del montaje -->
+        <div class="play-btn" id="play-macab" style="left:18.5%;top:48%;width:5.5%;height:9.5%;"
+          data-video-id="gmadd5f6iy" data-aspect="portrait" data-title="MACAB – Montaje de Obra">
+          <img src="slide3_img3.png" onerror="this.src='assets/slide3_img3.png'" alt="Play MACAB" />
+        </div>
+
+        <div class="exp-desc" style="left:3.5%;top:84%;width:48%;">
+          Asistencia técnica en la instalación de exhibiciones de gran formato, colaborando estrechamente con artistas y curadores para la correcta implementación de requerimientos espaciales y lumínicos.
         </div>
 
         <!-- 05 Galería Pasto -->
-        <div class="exp-number" style="left:59.68%;top:0.62%;">05</div>
-        <div class="exp-info" style="left:66.65%;top:1.86%;">
+        <div class="exp-number" style="left:57%;top:3.5%;">05</div>
+        <div class="exp-info" style="left:62.5%;top:4.2%;">
           <div class="org">GALERIA PASTO</div>
           <div class="role">2024-2025, ASISTENTE DE GALERÍA.</div>
         </div>
-        <div class="exp-desc" style="left:65.85%;top:76.97%;width:28%;">
-          Soporte operativo en la gestión de trastienda e inventario, incluyendo el acondicionamiento, embalaje técnico
-          para transporte nacional e internacional y actualización de bases de datos.
+
+        <div class="shape" style="left:57%;top:18%;width:39.5%;height:64%;">
+          <img class="bg-img" src="slide3_img2.jpg" onerror="this.src='assets/slide3_img2.jpg'" alt="Galería Pasto" />
         </div>
 
-        <div class="play-btn" id="play-macab" style="left:17.62%;top:42.01%;width:5.25%;height:9.34%;"
-          data-video-id="gmadd5f6iy" data-aspect="portrait" data-title="MACAB – Montaje de Obra">
-          <img src="slide3_img3.png" alt="Ver video MACAB" />
-        </div>
-
-        <div class="play-btn" id="play-pasto" style="left:76.94%;top:42.01%;width:5.25%;height:9.34%;"
+        <!-- Play Pasto -->
+        <div class="play-btn" id="play-pasto" style="left:73%;top:48%;width:5.5%;height:9.5%;"
           data-video-id="rj9uddmup6" data-aspect="portrait" data-title="Galería Pasto – Catalogación y Embalaje">
-          <img src="slide3_img3.png" alt="Ver video Galería Pasto" />
+          <img src="slide3_img3.png" onerror="this.src='assets/slide3_img3.png'" alt="Play Pasto" />
+        </div>
+
+        <div class="exp-desc" style="left:57%;top:84%;width:39.5%;">
+          Soporte operativo en la gestión de trastienda e inventario, incluyendo el acondicionamiento, embalaje técnico para transporte nacional e internacional y actualización de bases de datos.
         </div>
       </div>
 
-      <!-- SLIDE 5 – FILOSOFÍA -->
+      <!-- SLIDE 5 – FILOSOFÍA (RUTAS MÚLTIPLES AUTO-DETECTABLES) -->
       <div class="slide" id="slide-5">
-        <div class="shape" style="left:5.6%;top:7.3%;width:34.9%;height:82.7%;">
-          <img class="bg-img" src="slide4_img0.jpg" alt="" />
+        <div class="shape" style="left:5.5%;top:8%;width:35%;height:82%;">
+          <img class="bg-img" src="assets/slide4_img0.jpg"
+            onerror="this.onerror=null; this.src='slide4_img0.jpg'; this.onerror=function(){this.src='assets/slide4_img0.png';};"
+            alt="Experiencias" />
         </div>
         <div class="philosophy">
-          Lo que más me gusta hacer es generar experiencias mediante el arte.<br>
-          Poder brindar un relato que despierte interés<br>
+          Lo que más me gusta hacer es<br>
+          generar experiencias<br>
+          mediante el arte.<br><br>
+          Poder brindar un relato que<br>
+          despierte interés<br>
           en todo lo que habita el espacio.
         </div>
       </div>
 
-      <!-- SLIDE 6 – CONTACTO -->
+      <!-- SLIDE 6 – CONTACTO (RUTAS MÚLTIPLES AUTO-DETECTABLES) -->
       <div class="slide" id="slide-6">
-        <div class="shape" style="left:56.1%;top:7.2%;width:31.4%;height:85.5%;">
-          <img class="bg-img" src="slide5_img0.jpg" alt="" />
-        </div>
         <div class="contact-title">CONTACTA<br>CONMIGO</div>
+
+        <div class="access-projects iframe-btn"
+          data-url="https://drive.google.com/embeddedfolderview?id=1WrzIlZTF3-NLVjS8-mxcH74orq0vjNrU#list"
+          data-aspect="landscape" data-title="Google Drive – Proyectos">
+          ACCESO A MAS PROYECTOS
+        </div>
+
         <div class="contact-info">
           LLAMAME AL <strong>637 89 19 26</strong><br>
           ESCRIBIME EN <a class="contact-email" href="mailto:tobias.beme@gmail.com">TOBIAS.BEME@GMAIL.COM</a>
         </div>
-        
-        <div class="access-projects iframe-btn" data-url="https://drive.google.com/embeddedfolderview?id=1WrzIlZTF3-NLVjS8-mxcH74orq0vjNrU#list" data-aspect="landscape" data-title="Google Drive – Proyectos">
-          ACCESO A MAS PROYECTOS
-        </div>
-
         <div class="contact-country">ESPAÑA.</div>
+
+        <div class="shape" style="left:56%;top:7%;width:32%;height:86%;">
+          <img class="bg-img" src="assets/slide5_img0.jpg"
+            onerror="this.onerror=null; this.src='slide5_img0.jpg'; this.onerror=function(){this.src='assets/slide5_img0.png';};"
+            alt="Contacto" />
+        </div>
       </div>
 
     </div>
@@ -726,8 +719,7 @@
       <p id="modal-title"></p>
       <button id="modal-close" aria-label="Cerrar video">✕</button>
       <div class="modal-ratio">
-        <iframe id="modal-iframe" allow="autoplay; fullscreen" allowfullscreen src="about:blank">
-        </iframe>
+        <iframe id="modal-iframe" allow="autoplay; fullscreen" allowfullscreen src="about:blank"></iframe>
       </div>
     </div>
   </div>
@@ -759,6 +751,7 @@
       const dotNav = document.getElementById('dot-nav');
       const viewport = document.getElementById('slide-viewport');
       const modal = document.getElementById('video-modal');
+      const modalInner = document.getElementById('modal-inner');
       const modalIframe = document.getElementById('modal-iframe');
       const modalTitle = document.getElementById('modal-title');
       const modalClose = document.getElementById('modal-close');
@@ -813,22 +806,20 @@
         if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') goTo(current - 1);
       });
 
-      const modalInner = document.getElementById('modal-inner');
-
       function openModal(videoIdOrUrl, title, aspect, type = 'wistia') {
         if (aspect === 'portrait') {
           modalInner.classList.add('portrait');
         } else {
           modalInner.classList.remove('portrait');
         }
-        
+
         let src;
         if (type === 'iframe') {
           src = videoIdOrUrl;
         } else {
           src = `https://fast.wistia.net/embed/iframe/${videoIdOrUrl}?videoFoam=true&playbar=true&volumeControl=true&settingsControl=true&endVideoBehavior=default`;
         }
-        
+
         modalIframe.src = src;
         modalTitle.textContent = title;
         modal.classList.add('open');
@@ -853,7 +844,7 @@
           const url = btn.dataset.url;
           const title = btn.dataset.title;
           const aspect = btn.dataset.aspect || 'landscape';
-          
+
           if (id) {
             openModal(id, title, aspect, 'wistia');
           } else if (url) {
