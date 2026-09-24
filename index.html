@@ -63,7 +63,7 @@
       background: #000;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.4s ease;
       overflow: hidden;
     }
 
@@ -103,9 +103,10 @@
 
     @media (max-width: 768px) {
       #nav {
-        bottom: 16px;
+        bottom: 18px;
         padding: 6px 16px;
         gap: 10px;
+        background: rgba(18, 18, 18, 0.85);
       }
       .nav-btn {
         width: 32px;
@@ -786,23 +787,24 @@
         });
       }
 
-      // ESCALADO UNIVERSAL (ORDENADOR Y MÓVIL)
+      // ESCALADO EXACTO: ORDENADOR Y MÓVIL
       function scaleViewport() {
         const ww = window.innerWidth;
         const wh = window.innerHeight;
-        const navH = ww < 768 ? 70 : 90;
+        const navH = ww < 768 ? 64 : 90;
         const sw = 1600;
         const sh = 900;
 
         let scale, ox, oy;
 
         if (ww < 768 && wh > ww) {
-          // Móvil en vertical: se ajusta al ancho completo y se centra verticalmente
+          // Móvil en posición vertical: se escala al ancho total de la pantalla
           scale = ww / sw;
           ox = 0;
-          oy = (wh - navH - sh * scale) / 2;
+          // Centrado vertical exacto con margen inferior para la barra de navegación
+          oy = Math.max(10, (wh - navH - (sh * scale)) / 2);
         } else {
-          // Ordenador y móvil horizontal: mantiene la relación de aspecto sin recortes
+          // Escritorio / Pantallas horizontales
           scale = Math.min(ww / sw, (wh - navH) / sh);
           ox = (ww - sw * scale) / 2;
           oy = (wh - navH - sh * scale) / 2;
@@ -824,18 +826,17 @@
       prevBtn.addEventListener('click', () => goTo(current - 1));
       nextBtn.addEventListener('click', () => goTo(current + 1));
 
-      // SOPORTE TÁCTIL EN MÓVIL (SWIPE HORIZONTAL)
+      // Control por gestos táctiles en móvil (deslizar izquierda / derecha)
       let touchStartX = 0;
-      let touchEndX = 0;
       window.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
       }, { passive: true });
 
       window.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
         if (modal.classList.contains('open')) return;
-        if (touchStartX - touchEndX > 50) goTo(current + 1); // Deslizar a la izquierda: siguiente
-        if (touchEndX - touchStartX > 50) goTo(current - 1); // Deslizar a la derecha: anterior
+        const touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 45) goTo(current + 1);
+        if (touchEndX - touchStartX > 45) goTo(current - 1);
       }, { passive: true });
 
       document.addEventListener('keydown', (e) => {
