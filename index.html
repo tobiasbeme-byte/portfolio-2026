@@ -36,7 +36,6 @@
       font-family: 'Inter', sans-serif;
       overflow: hidden;
       color: var(--fg);
-      touch-action: pan-y;
     }
 
     #presentation {
@@ -99,19 +98,6 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 50px;
       padding: 10px 22px;
-    }
-
-    @media (max-width: 768px) {
-      #nav {
-        bottom: 18px;
-        padding: 6px 16px;
-        gap: 10px;
-        background: rgba(18, 18, 18, 0.85);
-      }
-      .nav-btn {
-        width: 32px;
-        height: 32px;
-      }
     }
 
     .nav-btn {
@@ -527,6 +513,294 @@
       border-color: var(--fg);
       opacity: 0.8;
     }
+
+    /* ══════════════════════════════════════════════════════════════════════════
+       ADAPTACIÓN REAL A MÓVILES (NO COMPRIME NI SOLAPA TEXTO)
+    ══════════════════════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      body {
+        overflow-y: auto !important;
+      }
+      #presentation {
+        position: relative !important;
+        inset: auto !important;
+        min-height: 100vh;
+      }
+      #slide-viewport {
+        position: relative !important;
+        width: 100vw !important;
+        height: auto !important;
+        transform: none !important;
+      }
+      .slide {
+        position: relative !important;
+        inset: auto !important;
+        width: 100vw !important;
+        height: auto !important;
+        min-height: calc(100vh - 80px);
+        padding: 24px 20px 100px 20px;
+        opacity: 0;
+        display: none !important;
+      }
+      .slide.active {
+        opacity: 1 !important;
+        display: flex !important;
+        flex-direction: column;
+      }
+
+      /* Portada Móvil */
+      #slide-0.active {
+        padding: 0 0 100px 0;
+      }
+      #slide-0 .shape {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 52vh !important;
+      }
+      #slide-0 .subtitle-left {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin: 20px 20px 0 20px;
+        font-size: 15px !important;
+        white-space: normal !important;
+      }
+      #slide-0 .year {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin: 4px 20px 0 20px;
+        text-align: left !important;
+        font-size: 15px !important;
+      }
+      #slide-0 .title-name {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin: 12px 20px 0 20px;
+        font-size: 80px !important;
+        line-height: 0.9 !important;
+      }
+
+      /* Sobre mí Móvil */
+      #slide-1 .degree {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        font-size: 14px !important;
+        white-space: normal !important;
+        margin-bottom: 12px;
+      }
+      #slide-1 .name-tag {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        text-align: left !important;
+        font-size: 26px !important;
+        margin-bottom: 16px;
+      }
+      #slide-1 .shape {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 240px !important;
+        margin-bottom: 14px;
+        border-radius: 6px;
+      }
+      #slide-1 .bio {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        font-size: 16px !important;
+        text-align: left !important;
+        line-height: 1.5 !important;
+        margin-top: 10px;
+      }
+      #slide-1 .section-title {
+        position: relative !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        font-size: 64px !important;
+        margin-top: 20px;
+      }
+
+      /* Catedral Móvil */
+      #slide-2 .exp-title-canva {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform: none !important;
+        text-align: center;
+        font-size: 64px !important;
+        margin-bottom: 16px;
+      }
+      #slide-2 .exp-row-canva {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin-bottom: 16px;
+      }
+      #slide-2 .exp-num-canva {
+        font-size: 42px !important;
+      }
+      #slide-2 .exp-text-canva .org {
+        font-size: 17px !important;
+      }
+      #slide-2 .exp-text-canva .role {
+        font-size: 15px !important;
+      }
+      #slide-2 .shape {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 260px !important;
+        margin-bottom: 14px;
+        border-radius: 6px;
+      }
+      #slide-2 .play-btn {
+        position: absolute !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 60px !important;
+        height: 60px !important;
+      }
+      #slide-2 .desc-bottom {
+        position: relative !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        font-size: 15px !important;
+        line-height: 1.5 !important;
+        margin-top: 14px;
+      }
+
+      /* Diapositivas 3 & 4 Móvil */
+      .exp-number {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        font-size: 42px !important;
+        margin-top: 16px;
+      }
+      .exp-info {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin-bottom: 12px;
+      }
+      .exp-info .org {
+        font-size: 17px !important;
+      }
+      .exp-info .role {
+        font-size: 15px !important;
+      }
+      #slide-3 .shape,
+      #slide-4 .shape {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 260px !important;
+        margin-bottom: 12px;
+        box-shadow: none !important;
+        border-radius: 6px;
+      }
+      #slide-3 .play-btn,
+      #slide-4 .play-btn {
+        position: absolute !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 60px !important;
+        height: 60px !important;
+      }
+      .exp-desc {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        font-size: 15px !important;
+        line-height: 1.5 !important;
+        margin-bottom: 24px;
+      }
+
+      /* Filosofía Móvil */
+      #slide-5 .shape {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 340px !important;
+        margin-bottom: 20px;
+        border-radius: 6px;
+      }
+      #slide-5 .philosophy {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        font-size: 32px !important;
+        line-height: 1.25 !important;
+      }
+
+      /* Contacto Móvil */
+      #slide-6 .contact-title {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        font-size: 64px !important;
+        margin-bottom: 16px;
+      }
+      #slide-6 .access-projects {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        font-size: 16px !important;
+        margin-bottom: 24px;
+      }
+      #slide-6 .shape {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: 340px !important;
+        margin-bottom: 20px;
+        border-radius: 6px;
+      }
+      #slide-6 .contact-info {
+        position: relative !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        font-size: 18px !important;
+        line-height: 1.8 !important;
+        margin-bottom: 10px;
+      }
+      #slide-6 .contact-country {
+        position: relative !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        font-size: 26px !important;
+      }
+
+      /* Barra de navegación inferior móvil */
+      #nav {
+        bottom: 16px !important;
+        padding: 6px 16px !important;
+        gap: 12px !important;
+        background: rgba(18, 18, 18, 0.92) !important;
+      }
+      .nav-btn {
+        width: 32px !important;
+        height: 32px !important;
+      }
+    }
   </style>
 </head>
 
@@ -540,15 +814,17 @@
         <div class="shape" style="left:0%;top:0%;width:43.2%;height:100%;">
           <img class="bg-img" src="slide0_img0.jpg" alt="Portada" />
         </div>
+        <div class="subtitle-left">MEDIADOR CULTURAL Y ASISTENTE DE GALERIAS</div>
+        <div class="year">2026</div>
         <div class="title-name">
           TOBIAS<br>DIAZ
         </div>
-        <div class="subtitle-left">MEDIADOR CULTURAL Y ASISTENTE DE GALERIAS</div>
-        <div class="year">2026</div>
       </div>
 
       <!-- SLIDE 1 – SOBRE MÍ -->
       <div class="slide" id="slide-1">
+        <div class="degree">LICENCIADO EN CURADURIA / MASTER EN COMUNICACIÓN</div>
+        <div class="name-tag">TOBIAS DIAZ</div>
         <div class="shape" style="left:5.5%;top:22.6%;width:28.1%;height:75%;">
           <img class="bg-img" src="slide1_img0.jpg" alt="" />
         </div>
@@ -558,9 +834,6 @@
         <div class="shape" style="left:34.1%;top:15.8%;width:31.6%;height:75%;">
           <img class="bg-img" src="slide1_img2.jpg" alt="" />
         </div>
-
-        <div class="degree">LICENCIADO EN CURADURIA / MASTER EN COMUNICACIÓN</div>
-        <div class="name-tag">TOBIAS DIAZ</div>
         <div class="bio">
           Llevo desde 2024 involucrándome profesionalmente en el campo cultural. Diseñé y ejecuté programas de mediación
           para la Fundación Andreani que atendieron a más de 500 visitantes mensuales, adaptando contenidos técnicos
@@ -586,14 +859,13 @@
         </div>
         <div class="shape" style="left:35.2%;top:24%;width:29.5%;height:61%;">
           <img class="bg-img" src="slide2_catedral2.jpg" alt="Nave Central" />
+          <div class="play-btn" id="play-catedral" style="left:40%;top:42%;width:20%;height:16%;"
+            data-video-id="i2kx9887no" data-aspect="portrait" data-title="Catedral de Bilbao – Visitas Guiadas">
+            <img src="slide3_img3.png" alt="Play Catedral" />
+          </div>
         </div>
         <div class="shape" style="left:67%;top:24%;width:29.5%;height:61%;">
-          <img class="bg-img" src="slide2_catedral3.jpg" alt="Atención al público" />
-        </div>
-
-        <div class="play-btn" id="play-catedral" style="left:47%;top:50%;width:5.5%;height:9.5%;"
-          data-video-id="i2kx9887no" data-aspect="portrait" data-title="Catedral de Bilbao – Visitas Guiadas">
-          <img src="slide3_img3.png" alt="Play Catedral" />
+          <img class="bg-img" src="slide2_catedral3.jpg" alt="Catedral 3" />
         </div>
 
         <div class="desc-bottom">
@@ -603,17 +875,17 @@
 
       <!-- SLIDE 3 – EXPERIENCIA 02 & 03: ANDREANI Y URRA -->
       <div class="slide" id="slide-3">
-        <div class="shape" style="left:3.6%;top:25.2%;width:48.2%;height:58%;">
-          <img class="bg-img" src="slide2_img0.jpg" alt="Fundación Andreani" />
-        </div>
-        <div class="shape" style="left:64.1%;top:25%;width:30.8%;height:56.8%;">
-          <img class="bg-img" src="slide2_img1.jpg" alt="Galería Urra Hip-Hip" />
-        </div>
-
         <div class="exp-number" style="left:0.6%;top:15.5%;">02</div>
         <div class="exp-info" style="left:5.5%;top:16.9%;">
           <div class="org">FUNDACION ANDREANI</div>
           <div class="role">2024-2025, MEDIADOR CULTURAL.</div>
+        </div>
+        <div class="shape" style="left:3.6%;top:25.2%;width:48.2%;height:58%;">
+          <img class="bg-img" src="slide2_img0.jpg" alt="Fundación Andreani" />
+          <div class="play-btn" id="play-andreani" style="left:43%;top:42%;width:14%;height:16%;"
+            data-video-id="sqxaf2ckxe" data-aspect="landscape" data-title="Fundación Andreani – Mediación Cultural">
+            <img src="slide2_img2.png" alt="Play Andreani" />
+          </div>
         </div>
         <div class="exp-desc" style="left:4.6%;top:85%;width:47%;">
           Gestión de grupos de hasta 60 personas en entornos museísticos, garantizando la calidad del relato institucional y la fidelización del público a través de estrategias de mediación crítica.
@@ -624,13 +896,11 @@
           <div class="org">GALERIA URRA HIP-HIP</div>
           <div class="role">2024, ASISTENTE DE GALERÍA DE ARTE.</div>
         </div>
+        <div class="shape" style="left:64.1%;top:25%;width:30.8%;height:56.8%;">
+          <img class="bg-img" src="slide2_img1.jpg" alt="Galería Urra Hip-Hip" />
+        </div>
         <div class="exp-desc" style="left:62%;top:84.8%;width:37%;">
           Atención al cliente y asesoramiento comercial para coleccionistas, facilitando el proceso de venta mediante un conocimiento profundo del mercado de arte y la producción de los artistas residentes.
-        </div>
-
-        <div class="play-btn" id="play-andreani" style="left:25%;top:51.6%;width:5.3%;height:9.3%;"
-          data-video-id="sqxaf2ckxe" data-aspect="landscape" data-title="Fundación Andreani – Mediación Cultural">
-          <img src="slide2_img2.png" alt="Play Andreani" />
         </div>
       </div>
 
@@ -642,17 +912,15 @@
           <div class="role">2025, ASISTENCIA EN MONTAJE DE OBRA.</div>
         </div>
 
+        <div class="shape" style="left:3.5%;top:20%;width:21.5%;height:62%;z-index:2;">
+          <img class="bg-img" src="slide3_img1.png" alt="Montaje obra" />
+          <div class="play-btn" id="play-macab" style="left:36%;top:42%;width:28%;height:16%;z-index:10;"
+            data-video-id="gmadd5f6iy" data-aspect="portrait" data-title="MACAB – Montaje de Obra">
+            <img src="slide3_img3.png" alt="Play MACAB" />
+          </div>
+        </div>
         <div class="shape" style="left:17.5%;top:14%;width:29.5%;height:68%;z-index:1;">
           <img class="bg-img" src="slide3_img0.jpg" alt="MACAB Sala" />
-        </div>
-
-        <div class="shape" style="left:3.5%;top:20%;width:21.5%;height:62%;z-index:2;box-shadow: -4px 0 25px rgba(0,0,0,0.7);">
-          <img class="bg-img" src="slide3_img1.png" alt="Montaje obra" />
-        </div>
-
-        <div class="play-btn" id="play-macab" style="left:12%;top:48%;width:5.5%;height:9.5%;z-index:10;"
-          data-video-id="gmadd5f6iy" data-aspect="portrait" data-title="MACAB – Montaje de Obra">
-          <img src="slide3_img3.png" alt="Play MACAB" />
         </div>
 
         <div class="exp-desc" style="left:3.5%;top:85%;width:46%;">
@@ -667,11 +935,10 @@
 
         <div class="shape" style="left:57%;top:14%;width:33%;height:68%;">
           <img class="bg-img" src="slide3_img2.jpg" alt="Galería Pasto" />
-        </div>
-
-        <div class="play-btn" id="play-pasto" style="left:72.5%;top:48%;width:5.5%;height:9.5%;z-index:10;"
-          data-video-id="rj9uddmup6" data-aspect="portrait" data-title="Galería Pasto – Catalogación y Embalaje">
-          <img src="slide3_img3.png" alt="Play Pasto" />
+          <div class="play-btn" id="play-pasto" style="left:40%;top:42%;width:20%;height:16%;z-index:10;"
+            data-video-id="rj9uddmup6" data-aspect="portrait" data-title="Galería Pasto – Catalogación y Embalaje">
+            <img src="slide3_img3.png" alt="Play Pasto" />
+          </div>
         </div>
 
         <div class="exp-desc" style="left:57%;top:85%;width:39.5%;">
@@ -698,15 +965,16 @@
 
       <!-- SLIDE 6 – CONTACTO -->
       <div class="slide" id="slide-6">
-        <div class="shape" style="left:56.1%;top:7.2%;width:31.4%;height:85.5%;">
-          <img class="bg-img auto-img"
-            data-srcs="slide5_img0.jpg,assets/slide5_img0.jpg,slide5_img0.png,assets/slide5_img0.png,slide6_img0.jpg,assets/slide6_img0.jpg"
-            src="slide5_img0.jpg" alt="" />
-        </div>
         <div class="contact-title">CONTACTA<br>CONMIGO</div>
         
         <div class="access-projects iframe-btn" data-url="https://drive.google.com/embeddedfolderview?id=1WrzIlZTF3-NLVjS8-mxcH74orq0vjNrU#list" data-aspect="landscape" data-title="Google Drive – Proyectos">
           ACCESO A MAS PROYECTOS
+        </div>
+
+        <div class="shape" style="left:56.1%;top:7.2%;width:31.4%;height:85.5%;">
+          <img class="bg-img auto-img"
+            data-srcs="slide5_img0.jpg,assets/slide5_img0.jpg,slide5_img0.png,assets/slide5_img0.png,slide6_img0.jpg,assets/slide6_img0.jpg"
+            src="slide5_img0.jpg" alt="" />
         </div>
 
         <div class="contact-info">
@@ -787,28 +1055,23 @@
         });
       }
 
-      // ESCALADO EXACTO: ORDENADOR Y MÓVIL
       function scaleViewport() {
         const ww = window.innerWidth;
         const wh = window.innerHeight;
-        const navH = ww < 768 ? 64 : 90;
+
+        // En pantallas móviles no escalamos a lo ancho para evitar solapamientos
+        if (ww <= 768) {
+          viewport.style.transform = 'none';
+          return;
+        }
+
+        const navH = 90;
         const sw = 1600;
         const sh = 900;
 
-        let scale, ox, oy;
-
-        if (ww < 768 && wh > ww) {
-          // Móvil en posición vertical: se escala al ancho total de la pantalla
-          scale = ww / sw;
-          ox = 0;
-          // Centrado vertical exacto con margen inferior para la barra de navegación
-          oy = Math.max(10, (wh - navH - (sh * scale)) / 2);
-        } else {
-          // Escritorio / Pantallas horizontales
-          scale = Math.min(ww / sw, (wh - navH) / sh);
-          ox = (ww - sw * scale) / 2;
-          oy = (wh - navH - sh * scale) / 2;
-        }
+        const scale = Math.min(ww / sw, (wh - navH) / sh);
+        const ox = (ww - sw * scale) / 2;
+        const oy = (wh - navH - sh * scale) / 2;
 
         viewport.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
       }
@@ -821,12 +1084,13 @@
         nextBtn.disabled = current === TOTAL - 1;
         counter.textContent = `${current + 1} / ${TOTAL}`;
         updateDots();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
       prevBtn.addEventListener('click', () => goTo(current - 1));
       nextBtn.addEventListener('click', () => goTo(current + 1));
 
-      // Control por gestos táctiles en móvil (deslizar izquierda / derecha)
+      // Gestos en móvil
       let touchStartX = 0;
       window.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
@@ -835,8 +1099,8 @@
       window.addEventListener('touchend', (e) => {
         if (modal.classList.contains('open')) return;
         const touchEndX = e.changedTouches[0].screenX;
-        if (touchStartX - touchEndX > 45) goTo(current + 1);
-        if (touchEndX - touchStartX > 45) goTo(current - 1);
+        if (touchStartX - touchEndX > 50) goTo(current + 1);
+        if (touchEndX - touchStartX > 50) goTo(current - 1);
       }, { passive: true });
 
       document.addEventListener('keydown', (e) => {
@@ -896,7 +1160,6 @@
       });
 
       window.addEventListener('resize', scaleViewport);
-      window.addEventListener('orientationchange', scaleViewport);
       scaleViewport();
     })();
   </script>
